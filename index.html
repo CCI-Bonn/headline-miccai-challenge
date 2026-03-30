@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Headline — MICCAI challenge on CT and MRI radiology report generation."
+    />
+    <title>Headline — MICCAI Challenge</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --surface: #1a2332;
+        --text: #e8ecf1;
+        --muted: #8b9aad;
+        --accent: #4da3ff;
+        --accent-soft: rgba(77, 163, 255, 0.15);
+        --radius: 12px;
+        --max: 42rem;
+        --pad: clamp(1rem, 4vw, 2rem);
+        --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font);
+        font-size: clamp(1rem, 2.5vw, 1.125rem);
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--pad);
+      }
+
+      header {
+        padding-block: clamp(2.5rem, 8vw, 4.5rem);
+        border-bottom: 1px solid var(--surface);
+      }
+
+      .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 0.35rem 0.65rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(1.85rem, 6vw, 2.75rem);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+
+      .lead {
+        margin: 0;
+        font-size: clamp(1.05rem, 2.8vw, 1.2rem);
+        color: var(--muted);
+        max-width: 36ch;
+      }
+
+      main {
+        padding-block: clamp(2rem, 6vw, 3.5rem);
+      }
+
+      section {
+        margin-bottom: clamp(2rem, 5vw, 3rem);
+      }
+
+      section:last-of-type {
+        margin-bottom: 0;
+      }
+
+      h2 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(1.15rem, 3vw, 1.35rem);
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0 0 1rem;
+        color: var(--muted);
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: clamp(1rem, 3vw, 1.35rem);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      footer {
+        padding-block: clamp(1.5rem, 4vw, 2rem);
+        border-top: 1px solid var(--surface);
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <span class="badge">MICCAI Challenge</span>
+        <h1>Headline</h1>
+        <p class="lead">
+          A MICCAI challenge focused on <strong style="color: var(--text)">CT and MRI</strong> imaging
+          for <strong style="color: var(--text)">radiology report generation</strong>.
+        </p>
+      </div>
+    </header>
+
+    <main id="content">
+      <div class="wrap">
+        <section aria-labelledby="about-heading">
+          <h2 id="about-heading">About</h2>
+          <div class="card">
+            <p>
+              Headline brings together the community to advance automated reporting from
+              cross-sectional scans. Participants work with CT and MRI data to produce accurate,
+              clinically useful narrative reports.
+            </p>
+            <p>
+              This is a one-page site for now; timeline, data, evaluation, and registration
+              details will be added here.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p>Headline — MICCAI. More content coming soon.</p>
+      </div>
+    </footer>
+  </body>
+</html>
