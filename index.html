@@ -3,169 +3,1043 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Headline — MICCAI challenge on CT and MRI radiology report generation."
-    />
+    <meta name="description" content="Headline — MICCAI challenge on head CT radiology report generation." />
+
+    <!-- Open Graph -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:site_name"    content="Headline MICCAI Challenge" />
+    <meta property="og:title"        content="Headline — MICCAI 2026 Challenge" />
+    <meta property="og:description"  content="Automated radiology report generation from 3D head CT scans. A dedicated benchmark at MICCAI 2026 to push the frontier of clinical NLP and medical image understanding." />
+    <meta property="og:url"          content="REPLACE_WITH_DEPLOYED_URL" />
+    <meta property="og:image"        content="REPLACE_WITH_DEPLOYED_URL/og-image.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale"       content="en_GB" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Headline — MICCAI 2026 Challenge" />
+    <meta name="twitter:description" content="Automated radiology report generation from 3D head CT scans. MICCAI 2026 benchmark for clinical NLP and medical image understanding." />
+    <meta name="twitter:image"       content="REPLACE_WITH_DEPLOYED_URL/og-image.png" />
+
     <title>Headline — MICCAI Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <style>
+      /* --- DESIGN TOKENS — edit these to retheme the whole site --- */
       :root {
-        --bg: #0f1419;
-        --surface: #1a2332;
-        --text: #e8ecf1;
-        --muted: #8b9aad;
-        --accent: #4da3ff;
-        --accent-soft: rgba(77, 163, 255, 0.15);
-        --radius: 12px;
-        --max: 42rem;
-        --pad: clamp(1rem, 4vw, 2rem);
-        --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        --bg:           #080d13;
+        --surface:      #101820;
+        --surface-2:    #162030;
+        --border:       rgba(255,255,255,0.07);
+        --text:         #dde4ed;
+        --muted:        #94a8bc;
+        --accent:       #3b9eff;
+        --accent-glow:  rgba(59, 158, 255, 0.18);
+        --accent-soft:  rgba(59, 158, 255, 0.10);
+        --gold:         #e8b84b;
+        --gold-soft:    rgba(232, 184, 75, 0.12);
+
+        --radius-sm:    6px;
+        --radius:       12px;
+        --radius-lg:    20px;
+
+        --max:          56rem;
+        --pad:          clamp(1.25rem, 5vw, 2.5rem);
+
+        --font-display: 'DM Serif Display', Georgia, serif;
+        --font-body:    'DM Sans', sans-serif;
+        --font-mono:    'DM Mono', monospace;
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      /* --- CONTENT — edit text here --- */
+      /* All placeholder copy is marked with TODO comments */
 
-      html {
-        scroll-behavior: smooth;
-      }
+      * { box-sizing: border-box; margin: 0; }
+      html { scroll-behavior: smooth; }
 
       body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: var(--font);
-        font-size: clamp(1rem, 2.5vw, 1.125rem);
-        line-height: 1.6;
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        line-height: 1.65;
         color: var(--text);
         background: var(--bg);
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
 
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
 
-      a:hover {
-        text-decoration: underline;
-      }
-
+      /* --- LAYOUT --- */
       .wrap {
         max-width: var(--max);
         margin: 0 auto;
-        padding: var(--pad);
+        padding-inline: var(--pad);
       }
 
+      /* --- NAV --- */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(8, 13, 19, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.85rem;
+      }
+
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        color: var(--text);
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+
+      .nav-logo span { color: var(--accent); }
+
+      .nav-links {
+        display: flex;
+        gap: clamp(0.75rem, 2.5vw, 1.75rem);
+        list-style: none;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+      /* --- MOBILE NAV --- */
+      .nav-check { display: none; }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        z-index: 101;
+      }
+
+      .nav-toggle span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: var(--muted);
+        border-radius: 2px;
+        transition: transform 0.25s, opacity 0.25s, background 0.2s;
+      }
+
+      .nav-toggle:hover span { background: var(--text); }
+
+      @media (max-width: 640px) {
+        .nav-toggle { display: flex; }
+
+        .nav-links {
+          position: fixed;
+          top: 0; left: 0; right: 0;
+          background: rgba(8, 13, 19, 0.97);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          padding: 4.5rem var(--pad) 2rem;
+          transform: translateY(-110%);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 99;
+          flex-wrap: nowrap;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links li { width: 100%; border-bottom: 1px solid var(--border); }
+        .nav-links li:last-child { border-bottom: none; }
+        .nav-links a { display: block; padding: 0.9rem 0; font-size: 0.9rem; }
+
+        .nav-links .btn-primary {
+          margin-top: 0.75rem;
+          width: 100%;
+          text-align: center;
+          padding: 0.65rem 1rem !important;
+          font-size: 0.9rem !important;
+        }
+
+        .nav-check:checked ~ .nav-links { transform: translateY(0); }
+
+        .nav-check:checked ~ .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-check:checked ~ .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-check:checked ~ .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      }
+
+      /* --- HERO --- */
       header {
-        padding-block: clamp(2.5rem, 8vw, 4.5rem);
-        border-bottom: 1px solid var(--surface);
+        padding-block: clamp(4rem, 12vw, 7rem);
+        position: relative;
+        overflow: hidden;
       }
 
-      .badge {
-        display: inline-block;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.06em;
+      /* subtle radial glow behind hero */
+      header::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 60% 60% at 15% 50%, rgba(59,158,255,0.07) 0%, transparent 70%),
+          radial-gradient(ellipse 40% 40% at 80% 20%, rgba(232,184,75,0.05) 0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      /* scanline texture */
+      header::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.015) 0px,
+          rgba(255,255,255,0.015) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        pointer-events: none;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--accent);
         background: var(--accent-soft);
-        padding: 0.35rem 0.65rem;
-        border-radius: 6px;
-        margin-bottom: 1rem;
+        border: 1px solid rgba(59,158,255,0.25);
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        margin-bottom: 1.75rem;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .hero-badge::before {
+        content: '';
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 6px var(--accent);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
       }
 
       h1 {
-        margin: 0 0 0.75rem;
-        font-size: clamp(1.85rem, 6vw, 2.75rem);
-        font-weight: 700;
-        line-height: 1.15;
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        font-weight: 400;
+        line-height: 1.05;
         letter-spacing: -0.02em;
+        margin-bottom: 0.2em;
+        animation: fadeUp 0.6s 0.1s ease both;
       }
 
-      .lead {
-        margin: 0;
-        font-size: clamp(1.05rem, 2.8vw, 1.2rem);
+      h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .hero-sub {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        color: var(--text);
+        max-width: 44ch;
+        margin-bottom: 0.5rem;
+        font-weight: 400;
+        animation: fadeUp 0.6s 0.2s ease both;
+      }
+
+      .hero-sub-secondary {
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
         color: var(--muted);
-        max-width: 36ch;
+        max-width: 52ch;
+        margin-bottom: 2.25rem;
+        font-weight: 300;
+        animation: fadeUp 0.6s 0.25s ease both;
       }
 
-      main {
-        padding-block: clamp(2rem, 6vw, 3.5rem);
+      .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        animation: fadeUp 0.6s 0.3s ease both;
       }
+
+      .btn {
+        display: inline-block;
+        padding: 0.65rem 1.35rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        cursor: pointer;
+        border: none;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(59,158,255,0.3);
+      }
+
+      .btn-primary:hover {
+        background: #5eaeff;
+        text-decoration: none;
+        box-shadow: 0 0 28px rgba(59,158,255,0.45);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: rgba(255,255,255,0.18);
+        text-decoration: none;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* --- STAT ROW --- */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: clamp(2.5rem, 6vw, 4rem);
+      }
+
+      .stat {
+        background: var(--surface);
+        padding: 1.25rem 1.5rem;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-family: var(--font-display);
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        color: var(--accent);
+        display: block;
+        line-height: 1;
+        margin-bottom: 0.3rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      /* --- SECTIONS --- */
+      main { padding-block: clamp(2rem, 6vw, 3.5rem); }
 
       section {
-        margin-bottom: clamp(2rem, 5vw, 3rem);
+        margin-bottom: clamp(3rem, 7vw, 5rem);
+        scroll-margin-top: 4rem;
       }
 
-      section:last-of-type {
-        margin-bottom: 0;
+      .section-label {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        display: block;
       }
 
       h2 {
-        margin: 0 0 0.75rem;
-        font-size: clamp(1.15rem, 3vw, 1.35rem);
-        font-weight: 600;
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.25rem;
+        line-height: 1.2;
       }
 
-      p {
-        margin: 0 0 1rem;
-        color: var(--muted);
-      }
+      p { color: var(--muted); margin-bottom: 1rem; }
+      p:last-child { margin-bottom: 0; }
 
-      p:last-child {
-        margin-bottom: 0;
-      }
-
+      /* --- CARD --- */
       .card {
         background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: clamp(1rem, 3vw, 1.35rem);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: clamp(1.25rem, 3vw, 1.75rem);
       }
 
-      footer {
-        padding-block: clamp(1.5rem, 4vw, 2rem);
-        border-top: 1px solid var(--surface);
-        font-size: 0.875rem;
+      .card + .card { margin-top: 1rem; }
+
+      /* --- TIMELINE --- */
+      .timeline {
+        position: relative;
+        padding-left: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 100%);
+      }
+
+      .tl-item {
+        position: relative;
+        padding: 1rem 0 1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .tl-item:last-child { border-bottom: none; }
+
+      .tl-item::before {
+        content: '';
+        position: absolute;
+        left: -1.75rem;
+        top: 1.35rem;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px rgba(59,158,255,0.6);
+        border: 2px solid var(--bg);
+      }
+
+      .tl-item.past::before { background: var(--muted); box-shadow: none; }
+
+      .tl-date {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
         color: var(--muted);
+        letter-spacing: 0.05em;
+        margin-bottom: 0.15rem;
+      }
+
+      .tl-title {
+        font-weight: 500;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .tl-desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
+      /* --- TASKS GRID --- */
+      .tasks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+
+      .task-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+
+      .task-card:hover { border-color: rgba(59,158,255,0.3); }
+
+      .task-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+      }
+
+      .task-num {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.6rem;
+      }
+
+      .task-title {
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+
+      .task-desc { font-size: 0.875rem; color: var(--muted); }
+
+      /* --- METRICS --- */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .metric-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.5rem;
+      }
+
+      .metric-name {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--accent);
+        margin-bottom: 0.35rem;
+      }
+
+      .metric-desc { font-size: 0.85rem; color: var(--muted); }
+
+      /* --- FAQ --- */
+      .faq-list { display: flex; flex-direction: column; gap: 0; }
+
+      details {
+        border-bottom: 1px solid var(--border);
+      }
+
+      details:first-child { border-top: 1px solid var(--border); }
+
+      summary {
+        cursor: pointer;
+        padding: 1rem 0;
+        font-weight: 500;
+        color: var(--text);
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        user-select: none;
+      }
+
+      summary::-webkit-details-marker { display: none; }
+
+      summary::after {
+        content: '+';
+        font-size: 1.2rem;
+        color: var(--accent);
+        flex-shrink: 0;
+        transition: transform 0.2s;
+        font-weight: 300;
+      }
+
+      details[open] summary::after { transform: rotate(45deg); }
+
+      .faq-body {
+        padding-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      /* --- REGISTRATION --- */
+      .reg-card {
+        background: var(--surface-2);
+        border: 1px solid rgba(59,158,255,0.2);
+        border-radius: var(--radius-lg);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      @media (max-width: 520px) {
+        .reg-card { grid-template-columns: 1fr; }
+      }
+
+      .reg-title {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* --- CONTACT --- */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .contact-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        text-align: center;
+      }
+
+      .contact-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+
+      .contact-link {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      /* --- ORGANISERS --- */
+      .organisers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+
+      .organiser-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        text-align: center;
+      }
+
+      .organiser-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        margin: 0 auto 0.75rem;
+      }
+
+      .organiser-name {
+        font-weight: 500;
+        color: var(--text);
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .organiser-affiliation {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        border-top: 1px solid var(--border);
+        padding-block: clamp(1.5rem, 4vw, 2.25rem);
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        color: var(--text);
       }
     </style>
   </head>
   <body>
+
+    <!-- --- NAVIGATION --- -->
+    <nav>
+      <div class="wrap nav-inner">
+        <img src="logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <input type="checkbox" id="nav-open" class="nav-check" aria-hidden="true" />
+        <label class="nav-toggle" for="nav-open" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </label>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#data">Data</a></li>
+          <li><a href="#evaluation">Evaluation</a></li>
+          <li><a href="#organisers">Organisers</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#registration" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em;">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- --- HERO --- -->
     <header>
       <div class="wrap">
-        <span class="badge">MICCAI Challenge</span>
-        <h1>Headline</h1>
-        <p class="lead">
-          A MICCAI challenge focused on <strong style="color: var(--text)"> head CT </strong> imaging
-          for <strong style="color: var(--text)">radiology report generation</strong>.
+        <div style="display: flex; align-items: center; gap: 4rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <img src="logo-transparent.png" alt="Headline logo" style="height: 80px; display: block;" />
+          <img src="miccai2026-mobile-logo.png" alt="MICCAI 2026 logo" style="height: 80px; display: block;" />
+        </div>
+        <p class="hero-sub">
+          Automated <strong>radiology report generation</strong> from 3D head CT scans.
         </p>
+        <p class="hero-sub-secondary">
+          A dedicated benchmark at MICCAI 2026 to push the frontier of clinical NLP and medical image understanding.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#registration" class="btn btn-primary">Register Now</a>
+          <a href="#about" class="btn btn-ghost">Learn More</a>
+        </div>
       </div>
     </header>
 
     <main id="content">
       <div class="wrap">
-        <section aria-labelledby="about-heading">
-          <h2 id="about-heading">About</h2>
+
+        <!-- --- STATS --- -->
+        <!-- TODO: update these numbers when known -->
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-value">TBA</span>
+            <span class="stat-label">Training scans</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">TBA</span>
+            <span class="stat-label">Test scans</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">TBA</span>
+            <span class="stat-label">Prize pool</span>
+          </div>
+        </div>
+
+        <!-- --- ABOUT --- -->
+        <section id="about">
+          <span class="section-label">01 — Overview</span>
+          <h2>About the Challenge</h2>
           <div class="card">
             <p>
-              Headline brings together the community to advance automated reporting from
-              cross-sectional scans. Participants work with CT and MRI data to produce accurate,
-              clinically useful narrative reports.
+              Radiological reporting of non-contrast head CT scans is a cornerstone of acute neurological care.
+              In emergency settings, clinicians rely on fast, precise, and comprehensive reports to guide
+              life-critical decisions. Yet this process remains time-intensive and highly dependent on expert
+              interpretation.
             </p>
             <p>
-              This is a one-page site for now; timeline, data, evaluation, and registration
-              details will be added here.
+              The HEADLINE MICCAI 2026 challenge introduces a dedicated benchmark for automated report
+              generation from 3D head CT scans using Vision-Language Models.
             </p>
           </div>
         </section>
-      </div>
+
+        <!-- --- TIMELINE --- -->
+        <section id="timeline">
+          <span class="section-label">02 — Key Dates</span>
+          <h2>Timeline</h2>
+          <div class="card">
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">May 1, 2026</div>
+                <div class="tl-title">Training data release</div>
+                <div class="tl-desc">Beginning of the release of the training dataset.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">June 1, 2026</div>
+                <div class="tl-title">Validation dataset release</div>
+                <div class="tl-desc">Release of the validation dataset.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">June 29, 2026</div>
+                <div class="tl-title">Submission system opens</div>
+                <div class="tl-desc">Submission system opens for sanity check.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">July 15, 2026</div>
+                <div class="tl-title">Final submission deadline</div>
+                <div class="tl-desc">All final docker submissions must be uploaded by this date.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">August 2026</div>
+                <div class="tl-title">Evaluation phase complete</div>
+                <div class="tl-desc">The top 3 teams will be announced, and they will be invited to present at MICCAI 2026.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">October 4 / October 8, 2026</div>
+                <div class="tl-title">MICCAI 2026</div>
+                <div class="tl-desc">Challenge session and announcement of challenge winners.</div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- --- DATA & TASKS --- -->
+        <section id="data">
+          <span class="section-label">03 — Data &amp; Tasks</span>
+          <h2>Dataset &amp; Tasks</h2>
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <p>
+              The HEADLINE dataset comprises a large-scale collection of real-world, non-contrast head CT
+              scans paired with corresponding radiologist-authored clinical reports. All cases originate from
+              routine clinical practice and capture the full spectrum and complexity of emergency neuroradiology,
+              including both normal findings and a wide range of pathologies such as haemorrhage, ischaemia,
+              trauma, and tumours.
+            </p>
+            <p>
+              Each case includes the complete 3D volumetric CT scan with soft tissue and bone reconstructions,
+              reflecting standard clinical reading conditions. The reference standard is defined by
+              expert-validated radiology reports, ensuring a high level of diagnostic accuracy.
+            </p>
+            <p>
+              All data undergo rigorous de-identification and quality control. The dataset is specifically
+              designed to reflect real-world variability in imaging protocols, scanner types, and reporting
+              styles, thereby enabling the development of robust, generalisable, and clinically relevant AI
+              systems.
+            </p>
+          </div>
+          <div class="tasks-grid">
+            <div class="task-card">
+              <div class="task-title">Task: Report Generation</div>
+              <p class="task-desc">
+                Given a full 3D volumetric CT image, models must produce a clinically accurate, coherent,
+                and structured free-text report - identifying and describing relevant findings such as
+                haemorrhage, infarction, fractures, or mass lesions, along with their anatomical location,
+                extent, and clinical significance.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- EVALUATION -->
+        <section id="evaluation">
+          <span class="section-label">04 — Evaluation</span>
+          <h2>Evaluation Metrics</h2>
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <p>
+              Submissions are evaluated using a two-stage, clinically grounded framework combining automated
+              metrics and expert review. This hybrid evaluation ensures that top-ranking models are not only
+              linguistically strong, but also clinically safe and meaningful.
+            </p>
+            <p>
+              In the <strong style="color: var(--text);">first stage</strong>, all models are assessed using a
+              weighted composite score based on: <span style="color: var(--accent);">BERTScore (F1)</span>,
+<span style="color: var(--accent);">METEOR</span>,
+<span style="color: var(--accent);">ROUGE-L</span>, and
+<span style="color: var(--accent);">BLEU-4</span>. In the 
+              <strong style="color: var(--text);">second stage</strong>, the top-performing models are evaluated 
+              by board-certified radiologists using a Clinical Utility Score, focusing on clinical accuracy, 
+              completeness, and potential for harm.
+            </p>
+          </div>
+          <!-- <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-name">BERTScore (F1)</div>
+              <p class="metric-desc">Primary metric for semantic similarity between generated and reference reports using contextual embeddings.</p>
+            </div>
+            <div class="metric-card">
+              <div class="metric-name">METEOR</div>
+              <p class="metric-desc">Metric for evaluation of translation with explicit ordering, capturing recall-oriented linguistic similarity.</p>
+            </div>
+            <div class="metric-card">
+              <div class="metric-name">ROUGE-L</div>
+              <p class="metric-desc">Longest common subsequence-based metric measuring fluency and recall of reference content.</p>
+            </div>
+            <div class="metric-card">
+              <div class="metric-name">BLEU-4</div>
+              <p class="metric-desc">N-gram precision metric providing a lexical similarity baseline against reference reports.</p>
+            </div>
+          </div> -->
+        </section>
+
+        <!-- --- REGISTRATION --- -->
+        <section id="registration">
+          <span class="section-label">05 — Registration</span>
+          <h2>Register</h2>
+          <div class="reg-card">
+            <div>
+              <div class="reg-title">Sign up for updates</div>
+              <!-- TODO: replace link below with real registration URL (e.g. Grand Challenge) -->
+              <p style="margin-bottom: 0;">
+                Registration will open on Grand Challenge. Sign up to be notified when the
+                challenge launches and data becomes available.
+              </p>
+            </div>
+            <!-- TODO: replace href with real registration link -->
+            <a href="#" class="btn btn-primary" style="white-space: nowrap;">Register on Grand Challenge →</a>
+          </div>
+        </section>
+
+        <!-- --- ORGANISERS --- -->
+        <section id="organisers">
+          <span class="section-label">06 — Organisers</span>
+          <h2>Organisers</h2>
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <p>
+              The HEADLINE challenge is organised by the Division for Computational Radiology &amp; Clinical AI
+              (CCIBonn) at the University Hospital Bonn, Germany. The team combines expertise in neuroradiology,
+              clinical research, and medical AI to ensure strong clinical relevance and methodological rigour.
+            </p>
+          </div>
+          <div class="organisers-grid">
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Martha Foltyn-Dumitru</div>
+              <!-- <div class="organiser-affiliation">CCIBonn, University Hospital Bonn</div> -->
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Philipp Vollmuth</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Ricky Walsh</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Tanuja Jayas</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Aditya Rastogi</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Gianluca Brugnara</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Kai Schlamp</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- --- FAQ --- -->
+        <section id="faq">
+          <span class="section-label">07 — FAQ</span>
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <details>
+              <summary>Who can participate?</summary>
+              <p class="faq-body">
+                The challenge is open to researchers, clinicians, and industry participants from both academia
+                and commercial organisations. Interdisciplinary teams are highly encouraged.
+              </p>
+            </details>
+            <details>
+              <summary>Is the dataset publicly available?</summary>
+              <p class="faq-body">
+                The dataset is not publicly available. After registration, participants will receive a Data
+                Transfer and Usage Agreement (DUA). Signing this agreement is mandatory to gain access to
+                the dataset and participate in the challenge. Once the signed agreement has been reviewed
+                and approved, participants will receive access to download the training dataset. The dataset
+                is provided exclusively for use within the scope of this challenge and must not be used for
+                any commercial purposes.
+              </p>
+            </details>
+            <details>
+              <summary>Can I use external data or pre-trained models?</summary>
+              <p class="faq-body">
+                Yes. Participants are allowed to use publicly available external datasets and pre-trained
+                models. This includes foundation models and open-source resources, as long as they are
+                accessible to all participants at the time of the challenge.
+              </p>
+            </details>
+            <details>
+              <summary>What are the computational resource requirements?</summary>
+              <p class="faq-body">
+                All submissions must be provided as Docker containers and will be executed on the standardised
+                infrastructure of the evaluation platform. Models need to run within predefined limits
+                of runtime, memory, and compute resources. Submissions exceeding these limits may be
+                terminated and treated as failed cases. This setup ensures a fair, reproducible, and secure
+                evaluation environment for all participants. The detailed specifications of the computational
+                constraints will be published here in the coming days.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <!-- --- CONTACT --- -->
+        <section id="contact">
+          <span class="section-label">08 — Contact</span>
+          <h2>Get in Touch</h2>
+          <div class="contact-grid">
+            <!-- TODO: replace all contact links and labels -->
+            <div class="contact-card">
+              <div class="contact-icon">✉️</div>
+              <div class="contact-label">Email</div>
+              <a class="contact-link" id="team-email">headline <!-- --> @ccibonn.ai</a>
+              <script>
+                const el = document.getElementById('team-email');
+                el.href = 'mailto:' + 'headline' + '@' + 'ccibonn.ai';
+                el.textContent = 'headline' + '@' + 'ccibonn.ai';
+              </script>  
+            
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">💬</div>
+              <div class="contact-label">Discussion Forum</div>
+              <!-- TODO: replace with real forum / Grand Challenge link -->
+              <a href="" class="contact-link">TBC</a>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">🐦</div>
+              <div class="contact-label">Social Media</div>
+              <!-- TODO: replace with real handle -->
+              <a href="" class="contact-link">TBC</a>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /wrap -->
     </main>
 
+    <!-- --- FOOTER --- -->
     <footer>
-      <div class="wrap">
-        <p>Headline — MICCAI. More content coming soon.</p>
+      <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.25rem; width:100%;">
+        <img src="logo-transparent.png" alt="Headline logo" style="height: 36px; margin-bottom: 2rem; display: block;" />
+        <span style="color: var(--muted);">© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
       </div>
     </footer>
+
   </body>
 </html>
