@@ -127,7 +127,71 @@
 
       .nav-links a:hover { color: var(--text); text-decoration: none; }
 
-      /* ─── HERO ─── */
+      /* --- MOBILE NAV --- */
+      .nav-check { display: none; }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        z-index: 101;
+      }
+
+      .nav-toggle span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: var(--muted);
+        border-radius: 2px;
+        transition: transform 0.25s, opacity 0.25s, background 0.2s;
+      }
+
+      .nav-toggle:hover span { background: var(--text); }
+
+      @media (max-width: 640px) {
+        .nav-toggle { display: flex; }
+
+        .nav-links {
+          position: fixed;
+          top: 0; left: 0; right: 0;
+          background: rgba(8, 13, 19, 0.97);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          padding: 4.5rem var(--pad) 2rem;
+          transform: translateY(-110%);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 99;
+          flex-wrap: nowrap;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links li { width: 100%; border-bottom: 1px solid var(--border); }
+        .nav-links li:last-child { border-bottom: none; }
+        .nav-links a { display: block; padding: 0.9rem 0; font-size: 0.9rem; }
+
+        .nav-links .btn-primary {
+          margin-top: 0.75rem;
+          width: 100%;
+          text-align: center;
+          padding: 0.65rem 1rem !important;
+          font-size: 0.9rem !important;
+        }
+
+        .nav-check:checked ~ .nav-links { transform: translateY(0); }
+
+        .nav-check:checked ~ .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-check:checked ~ .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-check:checked ~ .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      }
+
+      /* --- HERO --- */
       header {
         padding-block: clamp(4rem, 12vw, 7rem);
         position: relative;
