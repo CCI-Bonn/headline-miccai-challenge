@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <style>
-      /* ─── DESIGN TOKENS — edit these to retheme the whole site ─── */
+      /* --- DESIGN TOKENS — edit these to retheme the whole site --- */
       :root {
         --bg:           #080d13;
         --surface:      #101820;
         --surface-2:    #162030;
         --border:       rgba(255,255,255,0.07);
         --text:         #dde4ed;
-        --muted:        #6b7d91;
+        --muted:        #94a8bc;
         --accent:       #3b9eff;
         --accent-glow:  rgba(59, 158, 255, 0.18);
         --accent-soft:  rgba(59, 158, 255, 0.10);
@@ -35,7 +35,7 @@
         --font-mono:    'DM Mono', monospace;
       }
 
-      /* ─── CONTENT — edit text here ─── */
+      /* --- CONTENT — edit text here --- */
       /* All placeholder copy is marked with TODO comments */
 
       * { box-sizing: border-box; margin: 0; }
@@ -54,14 +54,14 @@
       a { color: var(--accent); text-decoration: none; }
       a:hover { text-decoration: underline; }
 
-      /* ─── LAYOUT ─── */
+      /* --- LAYOUT --- */
       .wrap {
         max-width: var(--max);
         margin: 0 auto;
         padding-inline: var(--pad);
       }
 
-      /* ─── NAV ─── */
+      /* --- NAV --- */
       nav {
         position: sticky;
         top: 0;
@@ -190,14 +190,21 @@
 
       .hero-sub {
         font-size: clamp(1rem, 2.5vw, 1.2rem);
-        color: var(--muted);
+        color: var(--text);
         max-width: 44ch;
-        margin-bottom: 2.25rem;
-        font-weight: 300;
+        margin-bottom: 0.5rem;
+        font-weight: 400;
         animation: fadeUp 0.6s 0.2s ease both;
       }
 
-      .hero-sub strong { color: var(--text); font-weight: 400; }
+      .hero-sub-secondary {
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
+        color: var(--muted);
+        max-width: 52ch;
+        margin-bottom: 2.25rem;
+        font-weight: 300;
+        animation: fadeUp 0.6s 0.25s ease both;
+      }
 
       .hero-cta {
         display: flex;
@@ -246,7 +253,7 @@
         to   { opacity: 1; transform: translateY(0); }
       }
 
-      /* ─── STAT ROW ─── */
+      /* --- STAT ROW --- */
       .stats {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -280,7 +287,7 @@
         color: var(--muted);
       }
 
-      /* ─── SECTIONS ─── */
+      /* --- SECTIONS --- */
       main { padding-block: clamp(2rem, 6vw, 3.5rem); }
 
       section {
@@ -310,7 +317,7 @@
       p { color: var(--muted); margin-bottom: 1rem; }
       p:last-child { margin-bottom: 0; }
 
-      /* ─── CARD ─── */
+      /* --- CARD --- */
       .card {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -320,7 +327,7 @@
 
       .card + .card { margin-top: 1rem; }
 
-      /* ─── TIMELINE ─── */
+      /* --- TIMELINE --- */
       .timeline {
         position: relative;
         padding-left: 1.75rem;
@@ -382,7 +389,7 @@
         margin-top: 0.2rem;
       }
 
-      /* ─── TASKS GRID ─── */
+      /* --- TASKS GRID --- */
       .tasks-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -426,7 +433,7 @@
 
       .task-desc { font-size: 0.875rem; color: var(--muted); }
 
-      /* ─── METRICS ─── */
+      /* --- METRICS --- */
       .metrics-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -449,7 +456,7 @@
 
       .metric-desc { font-size: 0.85rem; color: var(--muted); }
 
-      /* ─── FAQ ─── */
+      /* --- FAQ --- */
       .faq-list { display: flex; flex-direction: column; gap: 0; }
 
       details {
@@ -491,7 +498,7 @@
         max-width: 60ch;
       }
 
-      /* ─── REGISTRATION ─── */
+      /* --- REGISTRATION --- */
       .reg-card {
         background: var(--surface-2);
         border: 1px solid rgba(59,158,255,0.2);
@@ -513,7 +520,7 @@
         margin-bottom: 0.5rem;
       }
 
-      /* ─── CONTACT ─── */
+      /* --- CONTACT --- */
       .contact-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -546,7 +553,7 @@
         font-weight: 500;
       }
 
-      /* ─── ORGANISERS ─── */
+      /* --- ORGANISERS --- */
       .organisers-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -582,7 +589,7 @@
         color: var(--muted);
       }
 
-      /* ─── FOOTER ─── */
+      /* --- FOOTER --- */
       footer {
         border-top: 1px solid var(--border);
         padding-block: clamp(1.5rem, 4vw, 2.25rem);
@@ -604,10 +611,14 @@
   </head>
   <body>
 
-    <!-- ─── NAVIGATION ─── -->
+    <!-- --- NAVIGATION --- -->
     <nav>
       <div class="wrap nav-inner">
-        <span class="nav-logo">Head<em style="font-style:italic; color: var(--accent)">line</em></span>
+        <img src="logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <input type="checkbox" id="nav-open" class="nav-check" aria-hidden="true" />
+        <label class="nav-toggle" for="nav-open" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </label>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
           <li><a href="#timeline">Timeline</a></li>
@@ -621,18 +632,18 @@
       </div>
     </nav>
 
-    <!-- ─── HERO ─── -->
+    <!-- --- HERO --- -->
     <header>
       <div class="wrap">
-        <!-- TODO: update badge text if needed -->
-        <div class="hero-badge">MICCAI 2026 Challenge</div>
-
-        <!-- TODO: update subtitle below h1 -->
-        <!-- <h1>Head<em>line</em></h1> -->
-        <img src="logo-transparent.png" alt="Headline logo" style="height: 144px; margin-bottom: 1.5rem; display: block;" />
+        <div style="display: flex; align-items: center; gap: 4rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <img src="logo-transparent.png" alt="Headline logo" style="height: 80px; display: block;" />
+          <img src="miccai2026-mobile-logo.png" alt="MICCAI 2026 logo" style="height: 80px; display: block;" />
+        </div>
         <p class="hero-sub">
-          Automated <strong>radiology report generation</strong> from head CT scans —
-          pushing the frontier of clinical NLP and medical image understanding.
+          Automated <strong>radiology report generation</strong> from 3D head CT scans.
+        </p>
+        <p class="hero-sub-secondary">
+          A dedicated benchmark at MICCAI 2026 to push the frontier of clinical NLP and medical image understanding.
         </p>
 
         <div class="hero-cta">
@@ -645,7 +656,7 @@
     <main id="content">
       <div class="wrap">
 
-        <!-- ─── STATS ─── -->
+        <!-- --- STATS --- -->
         <!-- TODO: update these numbers when known -->
         <div class="stats">
           <div class="stat">
@@ -657,154 +668,148 @@
             <span class="stat-label">Test scans</span>
           </div>
           <div class="stat">
-            <span class="stat-value">2</span>
-            <span class="stat-label">Tasks</span>
-          </div>
-          <div class="stat">
             <span class="stat-value">TBA</span>
             <span class="stat-label">Prize pool</span>
           </div>
         </div>
 
-        <!-- ─── ABOUT ─── -->
+        <!-- --- ABOUT --- -->
         <section id="about">
           <span class="section-label">01 — Overview</span>
           <h2>About the Challenge</h2>
           <div class="card">
-            <!-- TODO: replace with real description -->
             <p>
-              Headline is a MICCAI 2026 challenge targeting automated radiology report generation
-              from head CT imaging. Participants are invited to develop models that produce
-              accurate, clinically meaningful free-text reports from volumetric CT data —
-              mimicking the workflow of a practising neuroradiologist.
+              Radiological reporting of non-contrast head CT scans is a cornerstone of acute neurological care.
+              In emergency settings, clinicians rely on fast, precise, and comprehensive reports to guide
+              life-critical decisions. Yet this process remains time-intensive and highly dependent on expert
+              interpretation.
             </p>
             <p>
-              The challenge addresses a critical bottleneck in clinical care: the time-intensive
-              nature of reporting. By benchmarking models across standardised tasks and metrics,
-              Headline aims to accelerate progress toward practical, deployable reporting systems.
-            </p>
-            <p>
-              This page is a placeholder — full details on dataset access, evaluation server,
-              and submission instructions will be published here in due course.
+              The HEADLINE MICCAI 2026 challenge introduces a dedicated benchmark for automated report
+              generation from 3D head CT scans using Vision-Language Models.
             </p>
           </div>
         </section>
 
-        <!-- ─── TIMELINE ─── -->
+        <!-- --- TIMELINE --- -->
         <section id="timeline">
           <span class="section-label">02 — Key Dates</span>
           <h2>Timeline</h2>
           <div class="card">
             <div class="timeline">
-              <!-- TODO: replace all dates and descriptions below -->
               <div class="tl-item">
-                <div class="tl-date">TBA</div>
-                <div class="tl-title">Challenge announcement</div>
-                <div class="tl-desc">Official launch and website goes live.</div>
-              </div>
-              <div class="tl-item">
-                <div class="tl-date">TBA</div>
+                <div class="tl-date">May 1, 2026</div>
                 <div class="tl-title">Training data release</div>
-                <div class="tl-desc">Registered participants gain access to the training set and baseline code.</div>
+                <div class="tl-desc">Beginning of the release of the training dataset.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">TBA</div>
-                <div class="tl-title">Validation phase opens</div>
-                <div class="tl-desc">Submission portal opens; teams may submit predictions on the validation set.</div>
+                <div class="tl-date">June 1, 2026</div>
+                <div class="tl-title">Validation dataset release</div>
+                <div class="tl-desc">Release of the validation dataset.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">TBA</div>
-                <div class="tl-title">Test phase opens</div>
-                <div class="tl-desc">Final test data released; limited submissions per team.</div>
+                <div class="tl-date">June 29, 2026</div>
+                <div class="tl-title">Submission system opens</div>
+                <div class="tl-desc">Submission system opens for sanity check.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">TBA</div>
-                <div class="tl-title">Submission deadline</div>
-                <div class="tl-desc">All final predictions and code must be submitted.</div>
+                <div class="tl-date">July 15, 2026</div>
+                <div class="tl-title">Final submission deadline</div>
+                <div class="tl-desc">All final docker submissions must be uploaded by this date.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">TBA</div>
-                <div class="tl-title">Results announced</div>
-                <div class="tl-desc">Winners notified; leaderboard published.</div>
+                <div class="tl-date">August 2026</div>
+                <div class="tl-title">Evaluation phase complete</div>
+                <div class="tl-desc">The top 3 teams will be announced, and they will be invited to present at MICCAI 2026.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">TBA — MICCAI 2026</div>
-                <div class="tl-title">Workshop day</div>
-                <div class="tl-desc">Challenge workshop co-located with MICCAI 2026.</div>
-              </div>
+                <div class="tl-date">October 4 / October 8, 2026</div>
+                <div class="tl-title">MICCAI 2026</div>
+                <div class="tl-desc">Challenge session and announcement of challenge winners.</div>
+
             </div>
           </div>
         </section>
 
-        <!-- ─── DATA & TASKS ─── -->
+        <!-- --- DATA & TASKS --- -->
         <section id="data">
           <span class="section-label">03 — Data &amp; Tasks</span>
           <h2>Dataset &amp; Tasks</h2>
           <div class="card" style="margin-bottom: 1.25rem;">
-            <!-- TODO: replace with real dataset description -->
             <p>
-              The Headline dataset consists of de-identified head CT volumes paired with
-              expert radiologist reports. Scans cover a range of pathologies including
-              haemorrhage, infarct, mass effect, and normal findings. Further details on
-              acquisition parameters, institutions, and annotation methodology will be provided
-              upon challenge launch.
+              The HEADLINE dataset comprises a large-scale collection of real-world, non-contrast head CT
+              scans paired with corresponding radiologist-authored clinical reports. All cases originate from
+              routine clinical practice and capture the full spectrum and complexity of emergency neuroradiology,
+              including both normal findings and a wide range of pathologies such as haemorrhage, ischaemia,
+              trauma, and tumours.
+            </p>
+            <p>
+              Each case includes the complete 3D volumetric CT scan with soft tissue and bone reconstructions,
+              reflecting standard clinical reading conditions. The reference standard is defined by
+              expert-validated radiology reports, ensuring a high level of diagnostic accuracy.
+            </p>
+            <p>
+              All data undergo rigorous de-identification and quality control. The dataset is specifically
+              designed to reflect real-world variability in imaging protocols, scanner types, and reporting
+              styles, thereby enabling the development of robust, generalisable, and clinically relevant AI
+              systems.
             </p>
           </div>
           <div class="tasks-grid">
-            <!-- TODO: update task names and descriptions -->
             <div class="task-card">
-              <div class="task-num">TASK 01</div>
-              <div class="task-title">Report Generation</div>
+              <div class="task-title">Task: Report Generation</div>
               <p class="task-desc">
-                Given a head CT volume, generate a full free-text radiology report covering
-                findings, impression, and recommendations.
-              </p>
-            </div>
-            <div class="task-card">
-              <div class="task-num">TASK 02</div>
-              <div class="task-title">Findings Extraction</div>
-              <p class="task-desc">
-                Structured extraction of key clinical findings from generated or reference
-                reports — enabling downstream quantitative analysis.
+                Given a full 3D volumetric CT image, models must produce a clinically accurate, coherent,
+                and structured free-text report - identifying and describing relevant findings such as
+                haemorrhage, infarction, fractures, or mass lesions, along with their anatomical location,
+                extent, and clinical significance.
               </p>
             </div>
           </div>
         </section>
 
-        <!-- ─── EVALUATION ─── -->
+        <!-- EVALUATION -->
         <section id="evaluation">
           <span class="section-label">04 — Evaluation</span>
           <h2>Evaluation Metrics</h2>
           <div class="card" style="margin-bottom: 1.25rem;">
-            <!-- TODO: update evaluation methodology description -->
             <p>
-              Submissions will be evaluated on a held-out test set using a combination of
-              automated NLP metrics and expert clinical assessment. The primary ranking metric
-              will be announced at challenge launch.
+              Submissions are evaluated using a two-stage, clinically grounded framework combining automated
+              metrics and expert review. This hybrid evaluation ensures that top-ranking models are not only
+              linguistically strong, but also clinically safe and meaningful.
+            </p>
+            <p>
+              In the <strong style="color: var(--text);">first stage</strong>, all models are assessed using a
+              weighted composite score based on: <span style="color: var(--accent);">BERTScore (F1)</span>,
+<span style="color: var(--accent);">METEOR</span>,
+<span style="color: var(--accent);">ROUGE-L</span>, and
+<span style="color: var(--accent);">BLEU-4</span>. In the 
+              <strong style="color: var(--text);">second stage</strong>, the top-performing models are evaluated 
+              by board-certified radiologists using a Clinical Utility Score, focusing on clinical accuracy, 
+              completeness, and potential for harm.
             </p>
           </div>
-          <div class="metrics-grid">
-            <!-- TODO: confirm metrics and add descriptions -->
+          <!-- <div class="metrics-grid">
             <div class="metric-card">
-              <div class="metric-name">BERTScore</div>
-              <p class="metric-desc">Semantic similarity between generated and reference reports using contextual embeddings.</p>
+              <div class="metric-name">BERTScore (F1)</div>
+              <p class="metric-desc">Primary metric for semantic similarity between generated and reference reports using contextual embeddings.</p>
             </div>
             <div class="metric-card">
-              <div class="metric-name">BLEU / ROUGE</div>
-              <p class="metric-desc">N-gram overlap metrics providing lexical similarity baselines.</p>
+              <div class="metric-name">METEOR</div>
+              <p class="metric-desc">Metric for evaluation of translation with explicit ordering, capturing recall-oriented linguistic similarity.</p>
             </div>
             <div class="metric-card">
-              <div class="metric-name">RadGraph F1</div>
-              <p class="metric-desc">Clinical entity and relation matching tailored to radiology report structure.</p>
+              <div class="metric-name">ROUGE-L</div>
+              <p class="metric-desc">Longest common subsequence-based metric measuring fluency and recall of reference content.</p>
             </div>
             <div class="metric-card">
-              <div class="metric-name">Clinical Accuracy</div>
-              <p class="metric-desc">Expert radiologist assessment of clinical correctness on a subset of predictions.</p>
+              <div class="metric-name">BLEU-4</div>
+              <p class="metric-desc">N-gram precision metric providing a lexical similarity baseline against reference reports.</p>
             </div>
-          </div>
+          </div> -->
         </section>
 
-        <!-- ─── REGISTRATION ─── -->
+        <!-- --- REGISTRATION --- -->
         <section id="registration">
           <span class="section-label">05 — Registration</span>
           <h2>Register</h2>
@@ -822,67 +827,96 @@
           </div>
         </section>
 
-        <!-- ─── ORGANISERS ─── -->
+        <!-- --- ORGANISERS --- -->
         <section id="organisers">
           <span class="section-label">06 — Organisers</span>
           <h2>Organisers</h2>
-          <!-- TODO: add organiser cards below. Example structure:
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <p>
+              The HEADLINE challenge is organised by the Division for Computational Radiology &amp; Clinical AI
+              (CCIBonn) at the University Hospital Bonn, Germany. The team combines expertise in neuroradiology,
+              clinical research, and medical AI to ensure strong clinical relevance and methodological rigour.
+            </p>
+          </div>
+          <div class="organisers-grid">
             <div class="organiser-card">
               <div class="organiser-avatar"></div>
-              <div class="organiser-name">Name</div>
-              <div class="organiser-affiliation">Institution</div>
+              <div class="organiser-name">Martha Foltyn-Dumitru</div>
+              <!-- <div class="organiser-affiliation">CCIBonn, University Hospital Bonn</div> -->
             </div>
-          -->
-          <div class="organisers-grid">
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Philipp Vollmuth</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Ricky Walsh</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Tanuja Jayas</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Aditya Rastogi</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Gianluca Brugnara</div>
+            </div>
+            <div class="organiser-card">
+              <div class="organiser-avatar"></div>
+              <div class="organiser-name">Kai Schlamp</div>
+            </div>
           </div>
         </section>
 
-        <!-- ─── FAQ ─── -->
+        <!-- --- FAQ --- -->
         <section id="faq">
           <span class="section-label">07 — FAQ</span>
           <h2>Frequently Asked Questions</h2>
           <div class="faq-list">
-            <!-- TODO: update or add FAQ items as needed -->
             <details>
               <summary>Who can participate?</summary>
               <p class="faq-body">
-                Headline is open to all researchers and practitioners worldwide, including
-                academic groups, industry teams, and individuals. Teams of any size are welcome.
+                The challenge is open to researchers, clinicians, and industry participants from both academia
+                and commercial organisations. Interdisciplinary teams are highly encouraged.
               </p>
             </details>
             <details>
-              <summary>Is there a fee to participate?</summary>
+              <summary>Is the dataset publicly available?</summary>
               <p class="faq-body">
-                Participation is free of charge. Registration through Grand Challenge is required
-                to access the data and submit predictions.
-              </p>
-            </details>
-            <details>
-              <summary>What computational resources will I need?</summary>
-              <p class="faq-body">
-                There are no enforced hardware requirements. Participants are responsible for
-                their own compute. Guidance on baseline model requirements will be provided
-                alongside the training data release.
-              </p>
-            </details>
-            <details>
-              <summary>Will training data be publicly released after the challenge?</summary>
-              <p class="faq-body">
-                Details on post-challenge data access will be announced at launch. We aim to
-                support the community with long-term dataset access where possible.
+                The dataset is not publicly available. After registration, participants will receive a Data
+                Transfer and Usage Agreement (DUA). Signing this agreement is mandatory to gain access to
+                the dataset and participate in the challenge. Once the signed agreement has been reviewed
+                and approved, participants will receive access to download the training dataset. The dataset
+                is provided exclusively for use within the scope of this challenge and must not be used for
+                any commercial purposes.
               </p>
             </details>
             <details>
               <summary>Can I use external data or pre-trained models?</summary>
               <p class="faq-body">
-                Rules regarding external data and pre-trained models will be specified in the
-                challenge protocol document, to be released at launch.
+                Yes. Participants are allowed to use publicly available external datasets and pre-trained
+                models. This includes foundation models and open-source resources, as long as they are
+                accessible to all participants at the time of the challenge.
+              </p>
+            </details>
+            <details>
+              <summary>What are the computational resource requirements?</summary>
+              <p class="faq-body">
+                All submissions must be provided as Docker containers and will be executed on the standardised
+                infrastructure of the evaluation platform. Models need to run within predefined limits
+                of runtime, memory, and compute resources. Submissions exceeding these limits may be
+                terminated and treated as failed cases. This setup ensures a fair, reproducible, and secure
+                evaluation environment for all participants. The detailed specifications of the computational
+                constraints will be published here in the coming days.
               </p>
             </details>
           </div>
         </section>
 
-        <!-- ─── CONTACT ─── -->
+        <!-- --- CONTACT --- -->
         <section id="contact">
           <span class="section-label">08 — Contact</span>
           <h2>Get in Touch</h2>
@@ -891,20 +925,25 @@
             <div class="contact-card">
               <div class="contact-icon">✉️</div>
               <div class="contact-label">Email</div>
-              <!-- TODO: replace with real email -->
-              <a href="/cdn-cgi/l/email-protection#8ee6ebefeae2e7e0eba3ede6efe2e2ebe0e9ebceebf6efe3fee2eba0ede1e3" class="contact-link"><span class="__cf_email__" data-cfemail="cea6abafaaa2a7a0ab8eabb6afa3bea2abe0ada1a3">[email&#160;protected]</span></a>
+              <a class="contact-link" id="team-email">headline <!-- --> @ccibonn.ai</a>
+              <script>
+                const el = document.getElementById('team-email');
+                el.href = 'mailto:' + 'headline' + '@' + 'ccibonn.ai';
+                el.textContent = 'headline' + '@' + 'ccibonn.ai';
+              </script>  
+            
             </div>
             <div class="contact-card">
               <div class="contact-icon">💬</div>
               <div class="contact-label">Discussion Forum</div>
               <!-- TODO: replace with real forum / Grand Challenge link -->
-              <a href="#" class="contact-link">Grand Challenge Forum</a>
+              <a href="" class="contact-link">TBC</a>
             </div>
             <div class="contact-card">
               <div class="contact-icon">🐦</div>
-              <div class="contact-label">Twitter / X</div>
+              <div class="contact-label">Social Media</div>
               <!-- TODO: replace with real handle -->
-              <a href="#" class="contact-link">@HeadlineChallenge</a>
+              <a href="" class="contact-link">TBC</a>
             </div>
           </div>
         </section>
@@ -912,9 +951,13 @@
       </div><!-- /wrap -->
     </main>
 
-    <!-- ─── FOOTER ─── -->
+    <!-- --- FOOTER --- -->
     <footer>
-      <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; width:100%;">
-        <img src="logo-transparent.png" alt="Headline logo" style="height: 48px; display: block;" />
-        <!-- TODO: update footer text -->
-        <span
+      <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.25rem; width:100%;">
+        <img src="logo-transparent.png" alt="Headline logo" style="height: 36px; margin-bottom: 2rem; display: block;" />
+        <span style="color: var(--muted);">© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
+      </div>
+    </footer>
+
+  </body>
+</html>
