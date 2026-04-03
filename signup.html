@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Register for the Headline MICCAI 2026 challenge on head CT radiology report generation." />
+    <meta name="robots" content="noindex" />
+
+    <title>Register — Headline MICCAI Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg:           #080d13;
+        --surface:      #101820;
+        --border:       rgba(255,255,255,0.07);
+        --text:         #dde4ed;
+        --muted:        #94a8bc;
+        --accent:       #3b9eff;
+
+        --max:          56rem;
+        --pad:          clamp(1.25rem, 5vw, 2.5rem);
+
+        --font-display: 'DM Serif Display', Georgia, serif;
+        --font-body:    'DM Sans', sans-serif;
+        --font-mono:    'DM Mono', monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; }
+
+      body {
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        line-height: 1.65;
+        color: #1a2030;
+        background: #fff;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+      }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding-inline: var(--pad);
+      }
+
+      /* --- NAV --- */
+      nav {
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.85rem;
+      }
+
+      .back-link {
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .back-link:hover { color: var(--text); }
+
+      /* --- MAIN --- */
+      main {
+        flex: 1;
+        padding-block: clamp(2.5rem, 8vw, 4rem);
+        background: #fff;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.75rem;
+        color: #0d1829;
+      }
+
+      .subtitle {
+        color: #4a5f78;
+        max-width: 36rem;
+        margin: 0 auto;
+      }
+
+      .form-wrapper {
+        width: 100%;
+        max-width: 660px;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      }
+
+      .form-wrapper iframe {
+        display: block;
+        width: 100%;
+        border: none;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+        padding-block: clamp(1.5rem, 4vw, 2.25rem);
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="wrap nav-inner">
+        <img src="logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <a class="back-link" href="index.html">&#8592; Back</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="wrap">
+        <div class="page-header">
+          <h1>Register</h1>
+          <p class="subtitle">
+            Register to participate in the Headline Challenge at MICCAI 2026. After submitting the form, you will receive an email with instructions on how to access the dataset. Check your spam folder if you don't see it in your inbox within a few minutes. If still not received after 24 hours, please contact us at <a href="mailto:headline@ccibonn.ai">headline@ccibonn.ai</a>.
+          </p>
+        </div>
+
+        <div class="form-wrapper">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSeq05qdFoVT9nnuZTYA1ZACSJtn_Q7uwz1bxW5zrmd_mDhMGQ/viewform?embedded=true"
+            height="1341"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0">
+            Loading…
+          </iframe>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <img src="logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
+        <span>© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
+      </div>
+    </footer>
+
+  </body>
+</html>
