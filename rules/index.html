@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Challenge rules for the Headline MICCAI 2026 challenge on head CT radiology report generation." />
+    <meta name="robots" content="noindex" />
+
+    <title>Rules — Headline MICCAI Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg:           #080d13;
+        --surface:      #101820;
+        --surface-2:    #162030;
+        --border:       rgba(255,255,255,0.07);
+        --text:         #dde4ed;
+        --muted:        #94a8bc;
+        --accent:       #3b9eff;
+        --accent-glow:  rgba(59, 158, 255, 0.18);
+
+        --max:          52rem;
+        --pad:          clamp(1.25rem, 5vw, 2.5rem);
+
+        --font-display: 'DM Serif Display', Georgia, serif;
+        --font-body:    'DM Sans', sans-serif;
+        --font-mono:    'DM Mono', monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        line-height: 1.65;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+      }
+
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding-inline: var(--pad);
+      }
+
+      /* --- NAV --- */
+      nav {
+        background: rgba(8, 13, 19, 0.95);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.85rem;
+      }
+
+      .back-link {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+        white-space: nowrap;
+      }
+
+      .back-link:hover { color: var(--text); text-decoration: none; }
+
+      /* --- CONTENT --- */
+      main {
+        flex: 1;
+        padding-block: clamp(2.5rem, 8vw, 4rem);
+      }
+
+      .page-header {
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .page-header p {
+        color: var(--muted);
+        margin-top: 0.5rem;
+        max-width: 44ch;
+      }
+
+      h1 {
+        font-family: var(--font-body);
+        font-size: clamp(1.75rem, 5vw, 2.25rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+
+      /* --- SECTIONS --- */
+      .rules-section {
+        margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+      }
+
+      h2 {
+        font-family: var(--font-body);
+        font-size: 1.05rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h3 {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h3:first-child { margin-top: 0; }
+
+      p {
+        color: var(--muted);
+        margin-bottom: 0.85rem;
+      }
+
+      p:last-child { margin-bottom: 0; }
+
+      ol, ul {
+        color: var(--muted);
+        padding-left: 1.5rem;
+        margin-bottom: 0.85rem;
+      }
+
+      ol:last-child, ul:last-child { margin-bottom: 0; }
+
+      li { margin-bottom: 0.4rem; }
+      li:last-child { margin-bottom: 0; }
+
+      strong { color: var(--text); font-weight: 500; }
+
+      .metric { color: var(--accent); }
+
+      .note {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 6px 6px 0;
+        padding: 0.85rem 1.1rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        border-top: 1px solid var(--border);
+        padding-block: clamp(1.5rem, 4vw, 2.25rem);
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-logos {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="wrap nav-inner">
+        <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <a class="back-link" href="../dev.html">&#8592; Back to main site</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="wrap">
+
+        <div class="page-header">
+          <h1>Challenge Rules</h1>
+          <p>Headline MICCAI 2026 — Head CT Radiology Report Generation</p>
+        </div>
+
+        <!-- 1. SUBMISSION PROCESS -->
+        <div class="rules-section">
+          <h2>1. Submission Process</h2>
+
+          <h3>Validation Phase</h3>
+          <p>
+            A dedicated Validation Set (distinct from the final hidden Test Set) will be released to
+            participants in the same format as the test data, without the associated ground-truth.
+            Participants will generate outputs for these validation cases and upload these outputs to
+            the evaluation platform. The results will appear on a publicly available leaderboard.
+          </p>
+          <p>Teams will be permitted to submit up to a total of 3 submissions in this phase.</p>
+
+          <h3>Sanity Check</h3>
+          <p>
+            The submissions for the validation phase above will be based on submitting the generated
+            reports for the validation cases. The final (single) submission for the test phase will be
+            a single Docker container containing the complete inference pipeline, which will then be
+            applied to the hidden test data on the evaluation platform. To ensure that your Docker
+            container is working as expected, there will also be a lightweight technical validation
+            phase. This sanity check will use a small subset of cases and is intended solely to verify
+            that submitted Docker containers execute correctly within the platform environment.
+            Performance on this subset will not be used for ranking.
+          </p>
+
+          <h3>Final Evaluation</h3>
+          <p>
+            Participants are required to package their inference models as Docker containers and upload
+            them directly to the evaluation platform for the final evaluation phase. The platform's
+            evaluation system will then automatically execute these containers on the hidden test data
+            in a secure, isolated cloud environment.
+          </p>
+          <p>
+            All submissions must comply with the predefined runtime and hardware constraints. These
+            will be shared in more detail in the coming days.
+          </p>
+        </div>
+
+        <!-- 2. EVALUATION -->
+        <div class="rules-section">
+          <h2>2. Evaluation</h2>
+          <p>
+            In the <strong>first stage</strong>, all models are assessed using a weighted composite
+            score based on: <span class="metric">BERTScore (F1)</span>,
+            <span class="metric">METEOR</span>, <span class="metric">ROUGE-L</span>, and
+            <span class="metric">BLEU-4</span>. In the <strong>second stage</strong>, the
+            top-performing models are evaluated by board-certified radiologists using a Clinical
+            Utility Score, focusing on clinical accuracy, completeness, and potential for harm.
+          </p>
+          <p>
+            The complete evaluation source code will be made publicly available in our
+            <a href="https://github.com/CCI-Bonn">GitHub repository</a>. We will provide the raw
+            scripts used to compute the ranking metrics to ensure full transparency.
+          </p>
+        </div>
+
+        <!-- 3. DATA USAGE -->
+        <div class="rules-section">
+          <h2>3. Data Usage</h2>
+          <p>
+            The training data will be released under a Custom Data Usage Agreement (DUA). Access is
+            granted solely for the purpose of this challenge. Participants must explicitly accept these
+            terms before downloading the data. Redistribution, sharing, or re-hosting of the dataset
+            is strictly prohibited.
+          </p>
+        </div>
+
+        <!-- 4. PRIZES -->
+        <div class="rules-section">
+          <h2>4. Prizes</h2>
+          <p>
+            We plan to give prizes to the three top-performing teams, with the exact amounts to be confirmed.
+          </p>
+          <p>To be eligible for the monetary prizes, participants must fulfil the following conditions:</p>
+          <ol>
+            <li>
+              <strong>Open Source:</strong> The winning teams must make their code publicly available
+              under a permissive open-source licence and provide instructions for reproducibility.
+            </li>
+            <li>
+              <strong>Method Description:</strong> Submission of a high-quality method description
+              paper for the challenge proceedings.
+            </li>
+            <li>
+              <strong>Presentation:</strong> At least one team member must register for the MICCAI
+              conference and present their solution during the challenge workshop.
+            </li>
+          </ol>
+        </div>
+
+        <!-- 5. PUBLICATIONS -->
+        <div class="rules-section">
+          <h2>5. Publications</h2>
+
+          <h3>Challenge Summary Paper</h3>
+          <p>
+            The organising team will coordinate a joint journal paper summarising the challenge design, data, and results.
+          </p>
+          <ul>
+            <li>
+              The core organising team constitutes the lead authorship. Additionally, up to two
+              representatives from each of the top-performing teams will be invited to contribute.
+            </li>
+            <li>
+              Co-authorship is contingent upon a timely and substantial contribution to the manuscript
+              (e.g., providing detailed analysis of their specific method).
+            </li>
+          </ul>
+
+          <h3>Participant Publications</h3>
+          <ul>
+            <li>
+              All participants are invited and encouraged to submit a paper describing their method to
+              the challenge's LNCS Proceedings.
+            </li>
+            <li>Participants are free to publish their own methods separately at any time.</li>
+            <li>
+              However, participants may not publish any paper that includes a comparative analysis of
+              the official challenge results or the private test data until the official Challenge
+              Summary Paper is published.
+            </li>
+          </ul>
+        </div>
+
+        <!-- 6. REPRODUCIBILITY & TRANSPARENCY -->
+        <div class="rules-section">
+          <h2>6. Reproducibility &amp; Transparency</h2>
+          <p>
+            To foster reproducibility and scientific progress, we strongly encourage all participants
+            to make their code publicly available.
+          </p>
+          <p>
+            To be eligible for monetary prizes and inclusion in the challenge summary paper, the
+            top-performing teams must release their training and inference code under a permissive
+            open-source licence (e.g., MIT, Apache 2.0) on a public repository (e.g., GitHub). The
+            code must be documented sufficiently to allow the reproduction of the submitted results.
+          </p>
+        </div>
+
+        <!-- 7. ELIGIBILITY & CONFLICTS OF INTEREST -->
+        <div class="rules-section">
+          <h2>7. Eligibility &amp; Conflicts of Interest</h2>
+          <p>
+            Members of the core organising team and their direct research groups are excluded from
+            participating in the competition for monetary prizes to avoid any conflict of interest.
+          </p>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div class="footer-logos">
+          <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
+          <img src="../images/ukb-logo.png" alt="University Hospital Bonn logo" style="height: 36px; display: block;" />
+        </div>
+        <span>© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
+      </div>
+    </footer>
+
+  </body>
+</html>
