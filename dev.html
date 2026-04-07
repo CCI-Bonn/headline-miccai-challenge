@@ -110,22 +110,27 @@
 
       .nav-links {
         display: flex;
-        gap: clamp(0.75rem, 2.5vw, 1.75rem);
+        gap: clamp(0.5rem, 1.5vw, 1.25rem);
         list-style: none;
         padding: 0;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        align-items: center;
       }
 
       .nav-links a {
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 500;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.03em;
         text-transform: uppercase;
         color: var(--muted);
         transition: color 0.2s;
+        white-space: nowrap;
       }
 
       .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+      .nav-links a.btn-primary { color: #fff; }
+      .nav-links a.btn-primary:hover { color: #fff; }
 
       /* --- MOBILE NAV --- */
       .nav-check { display: none; }
@@ -191,9 +196,29 @@
         .nav-check:checked ~ .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
       }
 
+      /* --- HERO LOGOS --- */
+      .hero-logos {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-logos img { height: 80px; display: block; }
+
+      @media (max-width: 480px) {
+        .hero-logos {
+          gap: 1.5rem;
+          justify-content: center;
+        }
+        .hero-logos img { height: 52px; }
+      }
+
       /* --- HERO --- */
       header {
-        padding-block: clamp(4rem, 12vw, 7rem);
+        padding-block-start: clamp(4rem, 12vw, 7rem);
+        padding-block-end: clamp(1.5rem, 4vw, 2.5rem);
         position: relative;
         overflow: hidden;
       }
@@ -335,62 +360,19 @@
         to   { opacity: 1; transform: translateY(0); }
       }
 
-      /* --- STAT ROW --- */
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 1px;
-        background: var(--border);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        overflow: hidden;
-        margin-bottom: clamp(2.5rem, 6vw, 4rem);
-      }
-
-      .stat {
-        background: var(--surface);
-        padding: 1.25rem 1.5rem;
-        text-align: center;
-      }
-
-      .stat-value {
-        font-family: var(--font-display);
-        font-size: clamp(1.6rem, 4vw, 2.2rem);
-        color: var(--accent);
-        display: block;
-        line-height: 1;
-        margin-bottom: 0.3rem;
-      }
-
-      .stat-label {
-        font-size: 0.75rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
       /* --- SECTIONS --- */
-      main { padding-block: clamp(2rem, 6vw, 3.5rem); }
+      main { padding-block-start: clamp(1rem, 3vw, 1.5rem); padding-block-end: clamp(2rem, 6vw, 3.5rem); }
 
       section {
         margin-bottom: clamp(3rem, 7vw, 5rem);
         scroll-margin-top: 4rem;
       }
 
-      .section-label {
-        font-family: var(--font-mono);
-        font-size: 0.72rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 0.5rem;
-        display: block;
-      }
 
       h2 {
-        font-family: var(--font-display);
-        font-size: clamp(1.5rem, 4vw, 2rem);
-        font-weight: 400;
+        font-family: var(--font-body);
+        font-size: clamp(1.3rem, 3.5vw, 1.75rem);
+        font-weight: 600;
         letter-spacing: -0.01em;
         margin-bottom: 1.25rem;
         line-height: 1.2;
@@ -513,7 +495,7 @@
         margin-bottom: 0.5rem;
       }
 
-      .task-desc { font-size: 0.875rem; color: var(--muted); }
+      .task-desc { color: var(--muted); }
 
       /* --- METRICS --- */
       .metrics-grid {
@@ -651,12 +633,13 @@
       }
 
       .organiser-avatar {
-        width: 64px;
-        height: 64px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
-        background: var(--surface-2);
-        border: 1px solid var(--border);
+        object-fit: cover;
+        border: 2px solid var(--border);
         margin: 0 auto 0.75rem;
+        display: block;
       }
 
       .organiser-name {
@@ -696,20 +679,21 @@
     <!-- --- NAVIGATION --- -->
     <nav>
       <div class="wrap nav-inner">
-        <img src="logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <img src="images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
         <input type="checkbox" id="nav-open" class="nav-check" aria-hidden="true" />
         <label class="nav-toggle" for="nav-open" aria-label="Open navigation menu">
           <span></span><span></span><span></span>
         </label>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
-          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#timeline">Key Dates</a></li>
           <li><a href="#data">Data</a></li>
           <li><a href="#evaluation">Evaluation</a></li>
+          <li><a href="#updates">Updates</a></li>
           <li><a href="#organisers">Organisers</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="signup.html" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em;">Register</a></li>
+          <li><a href="signup/" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em;">Register</a></li>
         </ul>
       </div>
     </nav>
@@ -717,9 +701,9 @@
     <!-- --- HERO --- -->
     <header>
       <div class="wrap">
-        <div style="display: flex; align-items: center; gap: 4rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-          <img src="logo-transparent.png" alt="Headline logo" style="height: 80px; display: block;" />
-          <img src="miccai2026-mobile-logo.png" alt="MICCAI 2026 logo" style="height: 80px; display: block;" />
+        <div class="hero-logos">
+          <img src="images/logo-transparent.png" alt="Headline logo" />
+          <img src="images/miccai2026-mobile-logo.png" alt="MICCAI 2026 logo" />
         </div>
         <p class="hero-sub">
           Automated <strong>radiology report generation</strong> from 3D head CT scans.
@@ -729,7 +713,7 @@
         </p>
 
         <div class="hero-cta">
-          <a href="signup.html" class="btn btn-primary">Register Now</a>
+          <a href="signup/" class="btn btn-primary">Register Now</a>
           <a href="#about" class="btn btn-ghost">Learn More</a>
         </div>
       </div>
@@ -738,26 +722,8 @@
     <main id="content">
       <div class="wrap">
 
-        <!-- --- STATS --- -->
-        <!-- TODO: update these numbers when known -->
-        <div class="stats">
-          <div class="stat">
-            <span class="stat-value">TBA</span>
-            <span class="stat-label">Training scans</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">TBA</span>
-            <span class="stat-label">Test scans</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">TBA</span>
-            <span class="stat-label">Prize pool</span>
-          </div>
-        </div>
-
         <!-- --- ABOUT --- -->
         <section id="about">
-          <span class="section-label">01 — Overview</span>
           <h2>About the Challenge</h2>
           <div class="card">
             <p>
@@ -773,10 +739,9 @@
           </div>
         </section>
 
-        <!-- --- TIMELINE --- -->
+        <!-- --- KEY DATES --- -->
         <section id="timeline">
-          <span class="section-label">02 — Key Dates</span>
-          <h2>Timeline</h2>
+          <h2>Key Dates</h2>
           <div class="card">
             <div class="timeline">
               <div class="tl-item">
@@ -815,7 +780,6 @@
 
         <!-- --- DATA & TASKS --- -->
         <section id="data">
-          <span class="section-label">03 — Data &amp; Tasks</span>
           <h2>Dataset &amp; Tasks</h2>
           <div class="card" style="margin-bottom: 1.25rem;">
             <p>
@@ -852,7 +816,6 @@
 
         <!-- EVALUATION -->
         <section id="evaluation">
-          <span class="section-label">04 — Evaluation</span>
           <h2>Evaluation Metrics</h2>
           <div class="card" style="margin-bottom: 1.25rem;">
             <p>
@@ -863,9 +826,8 @@
             <p>
               In the <strong style="color: var(--text);">first stage</strong>, all models are assessed using a
               weighted composite score based on: <span style="color: var(--accent);">BERTScore (F1)</span>,
-<span style="color: var(--accent);">METEOR</span>,
-<span style="color: var(--accent);">ROUGE-L</span>, and
-<span style="color: var(--accent);">BLEU-4</span>. In the 
+              <span style="color: var(--accent);">METEOR</span>, <span style="color: var(--accent);">ROUGE-L</span>, 
+              and<span style="color: var(--accent);">BLEU-4</span>. In the 
               <strong style="color: var(--text);">second stage</strong>, the top-performing models are evaluated 
               by board-certified radiologists using a Clinical Utility Score, focusing on clinical accuracy, 
               completeness, and potential for harm.
@@ -893,24 +855,34 @@
 
         <!-- --- REGISTRATION --- -->
         <section id="registration">
-          <span class="section-label">05 — Registration</span>
           <h2>Register</h2>
           <div class="reg-card">
             <div>
-              <div class="reg-title">Sign up for updates</div>
-              <!-- TODO: replace link below with real registration URL (e.g. Grand Challenge) -->
+              <!-- <div class="reg-title">Sign up for updates</div> -->
               <p style="margin-bottom: 0;">
-                Registration will open on Grand Challenge. Sign up to be notified when the
-                challenge launches and data becomes available.
+                Sign up now to be notified when the data is released. Please read the <a href="rules/">challenge rules</a> before registering.
               </p>
             </div>
-            <a href="signup.html" class="btn btn-primary" style="white-space: nowrap;">Register →</a>
+            <a href="signup/" class="btn btn-primary" style="white-space: nowrap;">Register →</a>
+          </div>
+        </section>
+
+        <!-- --- UPDATES --- -->
+        <section id="updates">
+          <h2>Updates</h2>
+          <div class="card">
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">April 2026</div>
+                <div class="tl-title">Website launched</div>
+                <div class="tl-desc">The Headline challenge website is now live. Registration is open.</div>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- --- ORGANISERS --- -->
         <section id="organisers">
-          <span class="section-label">06 — Organisers</span>
           <h2>Organisers</h2>
           <div class="card" style="margin-bottom: 1.25rem;">
             <p>
@@ -921,40 +893,45 @@
           </div>
           <div class="organisers-grid">
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Martha Foltyn-Dumitru</div>
-              <!-- <div class="organiser-affiliation">CCIBonn, University Hospital Bonn</div> -->
+              <img class="organiser-avatar" src="images/martha.jpg" alt="Martha Foltyn-Dumitru, MD" />
+              <div class="organiser-name">Martha Foltyn-Dumitru, MD</div>
+              <div class="organiser-affiliation">Clinical Research Lead</div>
             </div>
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Philipp Vollmuth</div>
+              <img class="organiser-avatar" src="images/philipp.jpg" alt="Philipp Vollmuth, MD" />
+              <div class="organiser-name">Philipp Vollmuth, MD</div>
+              <div class="organiser-affiliation">Else-Kröner CS Professor for AI in Medical Imaging</div>
             </div>
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Ricky Walsh</div>
+              <img class="organiser-avatar" src="images/ricky.jpg" alt="Ricky Walsh, PhD" />
+              <div class="organiser-name">Ricky Walsh, PhD</div>
+              <div class="organiser-affiliation">Postdoctoral Researcher</div>
             </div>
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Tanuja Jayas</div>
+              <img class="organiser-avatar" src="images/tanuja.jpg" alt="Tanuja Jayas, M.Tech" />
+              <div class="organiser-name">Tanuja Jayas, M.Tech</div>
+              <div class="organiser-affiliation">PhD Candidate</div>
             </div>
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Aditya Rastogi</div>
+              <img class="organiser-avatar" src="images/aditya.jpg" alt="Aditya Rastogi, PhD" />
+              <div class="organiser-name">Aditya Rastogi, PhD</div>
+              <div class="organiser-affiliation">AI Research Lead</div>
             </div>
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Gianluca Brugnara</div>
+              <img class="organiser-avatar" src="images/gianluca.jpg" alt="Gianluca Brugnara, MD" />
+              <div class="organiser-name">Gianluca Brugnara, MD</div>
+              <div class="organiser-affiliation">Clinical Research Lead</div>
             </div>
             <div class="organiser-card">
-              <div class="organiser-avatar"></div>
-              <div class="organiser-name">Kai Schlamp</div>
+              <img class="organiser-avatar" src="images/kai.jpg" alt="Kai Schlamp, MD" />
+              <div class="organiser-name">Kai Schlamp, MD</div>
+              <div class="organiser-affiliation">Engineering Lead</div>
             </div>
           </div>
         </section>
 
         <!-- --- FAQ --- -->
         <section id="faq">
-          <span class="section-label">07 — FAQ</span>
           <h2>Frequently Asked Questions</h2>
           <div class="faq-list">
             <details>
@@ -999,7 +976,6 @@
 
         <!-- --- CONTACT --- -->
         <section id="contact">
-          <span class="section-label">08 — Contact</span>
           <h2>Get in Touch</h2>
           <div class="contact-grid">
             <!-- TODO: replace all contact links and labels -->
@@ -1014,18 +990,6 @@
               </script>  
             
             </div>
-            <div class="contact-card">
-              <div class="contact-icon">💬</div>
-              <div class="contact-label">Discussion Forum</div>
-              <!-- TODO: replace with real forum / Grand Challenge link -->
-              <a href="" class="contact-link">TBC</a>
-            </div>
-            <div class="contact-card">
-              <div class="contact-icon">🐦</div>
-              <div class="contact-label">Social Media</div>
-              <!-- TODO: replace with real handle -->
-              <a href="" class="contact-link">TBC</a>
-            </div>
           </div>
         </section>
 
@@ -1034,11 +998,21 @@
 
     <!-- --- FOOTER --- -->
     <footer>
-      <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.25rem; width:100%;">
-        <img src="logo-transparent.png" alt="Headline logo" style="height: 36px; margin-bottom: 2rem; display: block;" />
+      <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; width:100%;">
+        <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+          <img src="images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
+          <img src="images/ukb-logo.png" alt="University Hospital Bonn logo" style="height: 36px; display: block;" />
+        </div>
         <span style="color: var(--muted);">© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
       </div>
     </footer>
 
+    <script>
+      document.querySelectorAll('.nav-links a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.getElementById('nav-open').checked = false;
+        });
+      });
+    </script>
   </body>
 </html>
