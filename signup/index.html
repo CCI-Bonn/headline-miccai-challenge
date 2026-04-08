@@ -12,12 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg:           #080d13;
-        --surface:      #101820;
-        --border:       rgba(255,255,255,0.07);
-        --text:         #dde4ed;
-        --muted:        #94a8bc;
-        --accent:       #3b9eff;
+        --bg:           #f5f7fa;
+        --surface:      #ffffff;
+        --border:       rgba(0,0,0,0.09);
+        --text:         #0d1822;
+        --muted:        #52677a;
+        --accent:       #1a78d0;
 
         --max:          56rem;
         --pad:          clamp(1.25rem, 5vw, 2.5rem);
@@ -49,8 +49,8 @@
 
       /* --- NAV --- */
       nav {
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
+        background: #040c1a;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
       }
 
       .nav-inner {
@@ -66,12 +66,12 @@
         font-weight: 500;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: var(--muted);
+        color: #94a8bc;
         text-decoration: none;
         transition: color 0.2s;
       }
 
-      .back-link:hover { color: var(--text); }
+      .back-link:hover { color: #dde4ed; opacity: 1; }
 
       /* --- MAIN --- */
       main {
@@ -118,11 +118,11 @@
 
       /* --- FOOTER --- */
       footer {
-        background: var(--bg);
-        border-top: 1px solid var(--border);
+        background: #040c1a;
+        border-top: 1px solid rgba(255,255,255,0.07);
         padding-block: clamp(1.5rem, 4vw, 2.25rem);
         font-size: 0.8rem;
-        color: var(--muted);
+        color: #94a8bc;
       }
 
       .footer-inner {
@@ -138,7 +138,8 @@
 
     <nav>
       <div class="wrap nav-inner">
-        <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <!-- TODO: update hrefs to "../" when dev.html replaces index.html -->
+        <a href="../dev.html" style="display:block; line-height:0;"><img src="../images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" /></a>
         <a class="back-link" href="../dev.html">&#8592; Back</a>
       </div>
     </nav>

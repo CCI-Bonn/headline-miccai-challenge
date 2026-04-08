@@ -12,14 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg:           #080d13;
-        --surface:      #101820;
-        --surface-2:    #162030;
-        --border:       rgba(255,255,255,0.07);
-        --text:         #dde4ed;
-        --muted:        #94a8bc;
-        --accent:       #3b9eff;
-        --accent-glow:  rgba(59, 158, 255, 0.18);
+        --bg:           #f5f7fa;
+        --surface:      #ffffff;
+        --surface-2:    #edf0f5;
+        --border:       rgba(0,0,0,0.09);
+        --text:         #0d1822;
+        --muted:        #52677a;
+        --accent:       #1a78d0;
+        --accent-glow:  rgba(26, 120, 208, 0.15);
 
         --max:          52rem;
         --pad:          clamp(1.25rem, 5vw, 2.5rem);
@@ -42,10 +42,11 @@
         display: flex;
         flex-direction: column;
         min-height: 100dvh;
+        overflow-x: hidden;
       }
 
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { text-decoration: underline; }
+      a { color: var(--accent); text-decoration: underline; }
+      a:hover { opacity: 0.8; }
 
       .wrap {
         max-width: var(--max);
@@ -55,8 +56,8 @@
 
       /* --- NAV --- */
       nav {
-        background: rgba(8, 13, 19, 0.95);
-        border-bottom: 1px solid var(--border);
+        background: #040c1a;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
       }
 
       .nav-inner {
@@ -72,13 +73,13 @@
         font-weight: 500;
         letter-spacing: 0.03em;
         text-transform: uppercase;
-        color: var(--muted);
+        color: #94a8bc;
         text-decoration: none;
         transition: color 0.2s;
         white-space: nowrap;
       }
 
-      .back-link:hover { color: var(--text); text-decoration: none; }
+      .back-link:hover { color: #dde4ed; text-decoration: none; opacity: 1; }
 
       /* --- CONTENT --- */
       main {
@@ -169,10 +170,11 @@
 
       /* --- FOOTER --- */
       footer {
-        border-top: 1px solid var(--border);
+        background: #040c1a;
+        border-top: 1px solid rgba(255,255,255,0.07);
         padding-block: clamp(1.5rem, 4vw, 2.25rem);
         font-size: 0.8rem;
-        color: var(--muted);
+        color: #94a8bc;
       }
 
       .footer-inner {
@@ -195,7 +197,8 @@
 
     <nav>
       <div class="wrap nav-inner">
-        <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <!-- TODO: update hrefs to "../" when dev.html replaces index.html -->
+        <a href="../dev.html" style="display:block; line-height:0;"><img src="../images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" /></a>
         <a class="back-link" href="../dev.html">&#8592; Back to main site</a>
       </div>
     </nav>
@@ -361,10 +364,7 @@
 
     <footer>
       <div class="wrap footer-inner">
-        <div class="footer-logos">
-          <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
-          <img src="../images/ukb-logo.png" alt="University Hospital Bonn logo" style="height: 36px; display: block;" />
-        </div>
+        <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
         <span>© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
       </div>
     </footer>

@@ -8,38 +8,60 @@
     <!-- Open Graph -->
     <meta property="og:type"         content="website" />
     <meta property="og:site_name"    content="Headline MICCAI Challenge" />
-    <meta property="og:title"        content="Headline — MICCAI 2026 Challenge" />
+    <meta property="og:title"        content="Headline — Head CT Report Generation | MICCAI 2026 Challenge" />
     <meta property="og:description"  content="Automated radiology report generation from 3D head CT scans. A dedicated benchmark at MICCAI 2026 to push the frontier of clinical NLP and medical image understanding." />
-    <meta property="og:url"          content="REPLACE_WITH_DEPLOYED_URL" />
-    <meta property="og:image"        content="REPLACE_WITH_DEPLOYED_URL/og-image.png" />
+    <meta property="og:url"          content="https://headline.ccibonn.ai" />
+    <meta property="og:image"        content="https://headline.ccibonn.ai/images/headline-miccai-2026.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale"       content="en_GB" />
+    <link rel="canonical"            href="https://headline.ccibonn.ai" />
 
-    <!-- Twitter / X Card -->
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="Headline — MICCAI 2026 Challenge" />
-    <meta name="twitter:description" content="Automated radiology report generation from 3D head CT scans. MICCAI 2026 benchmark for clinical NLP and medical image understanding." />
-    <meta name="twitter:image"       content="REPLACE_WITH_DEPLOYED_URL/og-image.png" />
-
-    <title>Headline — MICCAI Challenge</title>
+    <title>Headline — Head CT Report Generation | MICCAI 2026 Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Headline MICCAI 2026 Challenge",
+      "description": "A dedicated benchmark for automated radiology report generation from 3D head CT scans, combining Vision-Language Models with expert clinical evaluation.",
+      "url": "https://headline.ccibonn.ai",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-08",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "superEvent": {
+        "@type": "Event",
+        "name": "MICCAI 2026"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Division for Computational Radiology & Clinical AI (CCIBonn), University Hospital Bonn",
+        "url": "https://ccibonn.ai"
+      },
+      "about": {
+        "@type": "Dataset",
+        "name": "HEADLINE Dataset",
+        "description": "Large-scale collection of real-world non-contrast head CT scans paired with radiologist-authored clinical reports, covering the full spectrum of emergency neuroradiology findings."
+      }
+    }
+    </script>
     <style>
       /* --- DESIGN TOKENS — edit these to retheme the whole site --- */
       :root {
-        --bg:           #080d13;
-        --surface:      #101820;
-        --surface-2:    #162030;
-        --border:       rgba(255,255,255,0.07);
-        --text:         #dde4ed;
-        --muted:        #94a8bc;
-        --accent:       #3b9eff;
-        --accent-glow:  rgba(59, 158, 255, 0.18);
-        --accent-soft:  rgba(59, 158, 255, 0.10);
-        --gold:         #e8b84b;
-        --gold-soft:    rgba(232, 184, 75, 0.12);
+        --bg:           #f5f7fa;
+        --surface:      #ffffff;
+        --surface-2:    #edf0f5;
+        --border:       rgba(0,0,0,0.09);
+        --text:         #0d1822;
+        --muted:        #52677a;
+        --accent:       #1a78d0;
+        --accent-glow:  rgba(26, 120, 208, 0.15);
+        --accent-soft:  rgba(26, 120, 208, 0.08);
+        --gold:         #b8861a;
+        --gold-soft:    rgba(184, 134, 26, 0.10);
 
         --radius-sm:    6px;
         --radius:       12px;
@@ -59,6 +81,16 @@
       * { box-sizing: border-box; margin: 0; }
       html { scroll-behavior: smooth; }
 
+      .visually-hidden {
+        position: absolute;
+        width: 1px; height: 1px;
+        padding: 0; margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        border: 0;
+      }
+
       body {
         font-family: var(--font-body);
         font-size: clamp(0.95rem, 2.2vw, 1.05rem);
@@ -69,8 +101,9 @@
         overflow-x: hidden;
       }
 
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { text-decoration: underline; }
+      a { color: var(--accent); text-decoration: underline; }
+      code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent); background: var(--accent-soft); padding: 0.1em 0.4em; border-radius: 4px; }
+      a:hover { opacity: 0.8; }
 
       /* --- LAYOUT --- */
       .wrap {
@@ -84,10 +117,10 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        background: rgba(8, 13, 19, 0.85);
+        background: #040c1a;
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(255,255,255,0.07);
       }
 
       .nav-inner {
@@ -101,7 +134,7 @@
       .nav-logo {
         font-family: var(--font-display);
         font-size: 1.15rem;
-        color: var(--text);
+        color: #dde4ed;
         letter-spacing: 0.01em;
         white-space: nowrap;
       }
@@ -122,12 +155,13 @@
         font-weight: 500;
         letter-spacing: 0.03em;
         text-transform: uppercase;
-        color: var(--muted);
+        color: #94a8bc;
         transition: color 0.2s;
         white-space: nowrap;
+        text-decoration: none;
       }
 
-      .nav-links a:hover { color: var(--text); text-decoration: none; }
+      .nav-links a:hover { color: #dde4ed; text-decoration: none; opacity: 1; }
 
       .nav-links a.btn-primary { color: #fff; }
       .nav-links a.btn-primary:hover { color: #fff; }
@@ -150,12 +184,12 @@
         display: block;
         height: 2px;
         width: 100%;
-        background: var(--muted);
+        background: #94a8bc;
         border-radius: 2px;
         transition: transform 0.25s, opacity 0.25s, background 0.2s;
       }
 
-      .nav-toggle:hover span { background: var(--text); }
+      .nav-toggle:hover span { background: #dde4ed; }
 
       @media (max-width: 640px) {
         .nav-toggle { display: flex; }
@@ -163,7 +197,7 @@
         .nav-links {
           position: fixed;
           top: 0; left: 0; right: 0;
-          background: rgba(8, 13, 19, 0.97);
+          background: #040c1a;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           flex-direction: column;
@@ -174,10 +208,10 @@
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 99;
           flex-wrap: nowrap;
-          border-bottom: 1px solid var(--border);
+          border-bottom: 1px solid rgba(255,255,255,0.07);
         }
 
-        .nav-links li { width: 100%; border-bottom: 1px solid var(--border); }
+        .nav-links li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.07); }
         .nav-links li:last-child { border-bottom: none; }
         .nav-links a { display: block; padding: 0.9rem 0; font-size: 0.9rem; }
 
@@ -221,7 +255,14 @@
         padding-block-end: clamp(1.5rem, 4vw, 2.5rem);
         position: relative;
         overflow: hidden;
+        background: #040c1a;
       }
+
+      header h1 { color: #dde4ed; }
+      header .hero-sub { color: #dde4ed; }
+      header .hero-sub-secondary { color: #94a8bc; }
+      header .btn-ghost { color: #94a8bc; border-color: rgba(255,255,255,0.12); }
+      header .btn-ghost:hover { color: #dde4ed; border-color: rgba(255,255,255,0.25); }
 
       /* subtle radial glow behind hero */
       header::before {
@@ -229,7 +270,7 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(ellipse 60% 60% at 15% 50%, rgba(59,158,255,0.07) 0%, transparent 70%),
+          radial-gradient(ellipse 60% 60% at 15% 50%, rgba(26,120,208,0.07) 0%, transparent 70%),
           radial-gradient(ellipse 40% 40% at 80% 20%, rgba(232,184,75,0.05) 0%, transparent 60%);
         pointer-events: none;
       }
@@ -259,7 +300,7 @@
         text-transform: uppercase;
         color: var(--accent);
         background: var(--accent-soft);
-        border: 1px solid rgba(59,158,255,0.25);
+        border: 1px solid rgba(26,120,208,0.25);
         padding: 0.3rem 0.75rem;
         border-radius: 999px;
         margin-bottom: 1.75rem;
@@ -329,18 +370,21 @@
         transition: all 0.2s;
         cursor: pointer;
         border: none;
+        text-decoration: none;
       }
+
+      a.btn, a.btn:hover { text-decoration: none; }
 
       .btn-primary {
         background: var(--accent);
         color: #fff;
-        box-shadow: 0 0 20px rgba(59,158,255,0.3);
+        box-shadow: 0 0 20px rgba(26,120,208,0.2);
       }
 
       .btn-primary:hover {
-        background: #5eaeff;
+        background: #2589e0;
         text-decoration: none;
-        box-shadow: 0 0 28px rgba(59,158,255,0.45);
+        box-shadow: 0 0 28px rgba(26,120,208,0.35);
       }
 
       .btn-ghost {
@@ -351,7 +395,7 @@
 
       .btn-ghost:hover {
         color: var(--text);
-        border-color: rgba(255,255,255,0.18);
+        border-color: rgba(0,0,0,0.18);
         text-decoration: none;
       }
 
@@ -427,7 +471,7 @@
         height: 9px;
         border-radius: 50%;
         background: var(--accent);
-        box-shadow: 0 0 8px rgba(59,158,255,0.6);
+        box-shadow: 0 0 8px rgba(26,120,208,0.5);
         border: 2px solid var(--bg);
       }
 
@@ -470,7 +514,7 @@
         transition: border-color 0.2s;
       }
 
-      .task-card:hover { border-color: rgba(59,158,255,0.3); }
+      .task-card:hover { border-color: rgba(26,120,208,0.3); }
 
       .task-card::before {
         content: '';
@@ -478,14 +522,6 @@
         top: 0; left: 0; right: 0;
         height: 2px;
         background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-      }
-
-      .task-num {
-        font-family: var(--font-mono);
-        font-size: 0.7rem;
-        color: var(--accent);
-        letter-spacing: 0.1em;
-        margin-bottom: 0.6rem;
       }
 
       .task-title {
@@ -496,29 +532,6 @@
       }
 
       .task-desc { color: var(--muted); }
-
-      /* --- METRICS --- */
-      .metrics-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-      }
-
-      .metric-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.25rem 1.5rem;
-      }
-
-      .metric-name {
-        font-family: var(--font-mono);
-        font-size: 0.85rem;
-        color: var(--accent);
-        margin-bottom: 0.35rem;
-      }
-
-      .metric-desc { font-size: 0.85rem; color: var(--muted); }
 
       /* --- FAQ --- */
       .faq-list { display: flex; flex-direction: column; gap: 0; }
@@ -565,7 +578,7 @@
       /* --- REGISTRATION --- */
       .reg-card {
         background: var(--surface-2);
-        border: 1px solid rgba(59,158,255,0.2);
+        border: 1px solid rgba(26,120,208,0.2);
         border-radius: var(--radius-lg);
         padding: clamp(1.5rem, 4vw, 2.5rem);
         display: grid;
@@ -584,82 +597,15 @@
         margin-bottom: 0.5rem;
       }
 
-      /* --- CONTACT --- */
-      .contact-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-      }
 
-      .contact-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.25rem;
-        text-align: center;
-      }
-
-      .contact-icon {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .contact-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--muted);
-        margin-bottom: 0.35rem;
-      }
-
-      .contact-link {
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-
-      /* --- ORGANISERS --- */
-      .organisers-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 1rem;
-      }
-
-      .organiser-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.25rem;
-        text-align: center;
-      }
-
-      .organiser-avatar {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--border);
-        margin: 0 auto 0.75rem;
-        display: block;
-      }
-
-      .organiser-name {
-        font-weight: 500;
-        color: var(--text);
-        font-size: 0.9rem;
-        margin-bottom: 0.2rem;
-      }
-
-      .organiser-affiliation {
-        font-size: 0.75rem;
-        color: var(--muted);
-      }
 
       /* --- FOOTER --- */
       footer {
-        border-top: 1px solid var(--border);
+        background: #040c1a;
+        border-top: 1px solid rgba(255,255,255,0.07);
         padding-block: clamp(1.5rem, 4vw, 2.25rem);
         font-size: 0.8rem;
-        color: var(--muted);
+        color: #94a8bc;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -670,7 +616,7 @@
       .footer-logo {
         font-family: var(--font-display);
         font-size: 1rem;
-        color: var(--text);
+        color: #dde4ed;
       }
     </style>
   </head>
@@ -679,7 +625,8 @@
     <!-- --- NAVIGATION --- -->
     <nav>
       <div class="wrap nav-inner">
-        <img src="images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" />
+        <!-- TODO: update href to "./" when dev.html replaces index.html -->
+        <a href="dev.html" style="display:block; line-height:0;"><img src="images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" /></a>
         <input type="checkbox" id="nav-open" class="nav-check" aria-hidden="true" />
         <label class="nav-toggle" for="nav-open" aria-label="Open navigation menu">
           <span></span><span></span><span></span>
@@ -701,6 +648,7 @@
     <!-- --- HERO --- -->
     <header>
       <div class="wrap">
+        <h1 class="visually-hidden">Headline — MICCAI 2026 Challenge: Automated Head CT Radiology Report Generation</h1>
         <div class="hero-logos">
           <img src="images/logo-transparent.png" alt="Headline logo" />
           <img src="images/miccai2026-mobile-logo.png" alt="MICCAI 2026 logo" />
@@ -773,7 +721,7 @@
                 <div class="tl-date">October 4 / October 8, 2026</div>
                 <div class="tl-title">MICCAI 2026</div>
                 <div class="tl-desc">Challenge session and announcement of challenge winners.</div>
-
+              </div>
             </div>
           </div>
         </section>
@@ -824,33 +772,15 @@
               linguistically strong, but also clinically safe and meaningful.
             </p>
             <p>
-              In the <strong style="color: var(--text);">first stage</strong>, all models are assessed using a
-              weighted composite score based on: <span style="color: var(--accent);">BERTScore (F1)</span>,
-              <span style="color: var(--accent);">METEOR</span>, <span style="color: var(--accent);">ROUGE-L</span>, 
-              and<span style="color: var(--accent);">BLEU-4</span>. In the 
-              <strong style="color: var(--text);">second stage</strong>, the top-performing models are evaluated 
-              by board-certified radiologists using a Clinical Utility Score, focusing on clinical accuracy, 
+              In the <strong>first stage</strong>, all models are assessed using a
+              weighted composite score based on: <code>BERTScore (F1)</code>,
+              <code>METEOR</code>, <code>ROUGE-L</code>,
+              and <code>BLEU-4</code>. In the
+              <strong>second stage</strong>, the top-performing models are evaluated
+              by board-certified radiologists using a Clinical Utility Score, focusing on clinical accuracy,
               completeness, and potential for harm.
             </p>
           </div>
-          <!-- <div class="metrics-grid">
-            <div class="metric-card">
-              <div class="metric-name">BERTScore (F1)</div>
-              <p class="metric-desc">Primary metric for semantic similarity between generated and reference reports using contextual embeddings.</p>
-            </div>
-            <div class="metric-card">
-              <div class="metric-name">METEOR</div>
-              <p class="metric-desc">Metric for evaluation of translation with explicit ordering, capturing recall-oriented linguistic similarity.</p>
-            </div>
-            <div class="metric-card">
-              <div class="metric-name">ROUGE-L</div>
-              <p class="metric-desc">Longest common subsequence-based metric measuring fluency and recall of reference content.</p>
-            </div>
-            <div class="metric-card">
-              <div class="metric-name">BLEU-4</div>
-              <p class="metric-desc">N-gram precision metric providing a lexical similarity baseline against reference reports.</p>
-            </div>
-          </div> -->
         </section>
 
         <!-- --- REGISTRATION --- -->
@@ -884,49 +814,14 @@
         <!-- --- ORGANISERS --- -->
         <section id="organisers">
           <h2>Organisers</h2>
-          <div class="card" style="margin-bottom: 1.25rem;">
+          <div class="card">
             <p>
-              The HEADLINE challenge is organised by the Division for Computational Radiology &amp; Clinical AI
-              (CCIBonn) at the University Hospital Bonn, Germany. The team combines expertise in neuroradiology,
-              clinical research, and medical AI to ensure strong clinical relevance and methodological rigour.
+              The HEADLINE challenge is organised by the <a href="https://ccibonn.ai">Division for Computational Radiology &amp; Clinical AI (CCIBonn)</a> at the University Hospital Bonn, Germany. The team combines expertise in neuroradiology, clinical research, and medical AI to ensure strong clinical relevance and methodological rigour.
             </p>
-          </div>
-          <div class="organisers-grid">
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/martha.jpg" alt="Martha Foltyn-Dumitru, MD" />
-              <div class="organiser-name">Martha Foltyn-Dumitru, MD</div>
-              <div class="organiser-affiliation">Clinical Research Lead</div>
-            </div>
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/philipp.jpg" alt="Philipp Vollmuth, MD" />
-              <div class="organiser-name">Philipp Vollmuth, MD</div>
-              <div class="organiser-affiliation">Else-Kröner CS Professor for AI in Medical Imaging</div>
-            </div>
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/ricky.jpg" alt="Ricky Walsh, PhD" />
-              <div class="organiser-name">Ricky Walsh, PhD</div>
-              <div class="organiser-affiliation">Postdoctoral Researcher</div>
-            </div>
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/tanuja.jpg" alt="Tanuja Jayas, M.Tech" />
-              <div class="organiser-name">Tanuja Jayas, M.Tech</div>
-              <div class="organiser-affiliation">PhD Candidate</div>
-            </div>
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/aditya.jpg" alt="Aditya Rastogi, PhD" />
-              <div class="organiser-name">Aditya Rastogi, PhD</div>
-              <div class="organiser-affiliation">AI Research Lead</div>
-            </div>
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/gianluca.jpg" alt="Gianluca Brugnara, MD" />
-              <div class="organiser-name">Gianluca Brugnara, MD</div>
-              <div class="organiser-affiliation">Clinical Research Lead</div>
-            </div>
-            <div class="organiser-card">
-              <img class="organiser-avatar" src="images/kai.jpg" alt="Kai Schlamp, MD" />
-              <div class="organiser-name">Kai Schlamp, MD</div>
-              <div class="organiser-affiliation">Engineering Lead</div>
-            </div>
+            <p style="font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Organising Team</p>
+            <p>
+              Martha Foltyn-Dumitru, MD &ensp;&middot;&ensp; Philipp Vollmuth, MD &ensp;&middot;&ensp; Ricky Walsh, PhD &ensp;&middot;&ensp; Tanuja Jayas, M.Tech &ensp;&middot;&ensp; Aditya Rastogi, PhD &ensp;&middot;&ensp; Alexander Radbruch, MD &ensp;&middot;&ensp; Gianluca Brugnara, MD &ensp;&middot;&ensp; Kai Schlamp, MD
+            </p>
           </div>
         </section>
 
@@ -977,20 +872,12 @@
         <!-- --- CONTACT --- -->
         <section id="contact">
           <h2>Get in Touch</h2>
-          <div class="contact-grid">
-            <!-- TODO: replace all contact links and labels -->
-            <div class="contact-card">
-              <div class="contact-icon">✉️</div>
-              <div class="contact-label">Email</div>
-              <a class="contact-link" id="team-email">headline <!-- --> @ccibonn.ai</a>
-              <script>
-                const el = document.getElementById('team-email');
-                el.href = 'mailto:' + 'headline' + '@' + 'ccibonn.ai';
-                el.textContent = 'headline' + '@' + 'ccibonn.ai';
-              </script>  
-            
-            </div>
-          </div>
+          <p>For questions or enquiries, email us at <a id="team-email">headline <!-- --> @ccibonn.ai</a>.
+          <script>
+            const el = document.getElementById('team-email');
+            el.href = 'mailto:' + 'headline' + '@' + 'ccibonn.ai';
+            el.textContent = 'headline' + '@' + 'ccibonn.ai';
+          </script></p>
         </section>
 
       </div><!-- /wrap -->
@@ -1001,9 +888,8 @@
       <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; width:100%;">
         <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
           <img src="images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
-          <img src="images/ukb-logo.png" alt="University Hospital Bonn logo" style="height: 36px; display: block;" />
         </div>
-        <span style="color: var(--muted);">© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
+        <span style="color: #94a8bc;">© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
       </div>
     </footer>
 
