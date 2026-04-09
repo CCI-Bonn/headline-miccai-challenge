@@ -3,22 +3,72 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Headline — MICCAI challenge on head CT radiology report generation. Coming soon." />
-    <meta name="robots" content="noindex" />
+    <meta name="description" content="Headline – MICCAI challenge on head CT radiology report generation." />
 
-    <title>Headline — MICCAI Challenge</title>
+    <!-- Open Graph -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:site_name"    content="Headline MICCAI Challenge" />
+    <meta property="og:title"        content="Headline – Head CT Report Generation | MICCAI 2026 Challenge" />
+    <meta property="og:description"  content="Automated radiology report generation from 3D head CT scans. A dedicated benchmark at MICCAI 2026 to push the frontier of clinical NLP and medical image understanding." />
+    <meta property="og:url"          content="https://headline.ccibonn.ai" />
+    <meta property="og:image"        content="https://headline.ccibonn.ai/images/headline-miccai-2026.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale"       content="en_GB" />
+    <link rel="canonical"            href="https://headline.ccibonn.ai" />
+
+    <title>Headline – Head CT Report Generation | MICCAI 2026 Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Headline MICCAI 2026 Challenge",
+      "description": "A dedicated benchmark for automated radiology report generation from 3D head CT scans, combining Vision-Language Models with expert clinical evaluation.",
+      "url": "https://headline.ccibonn.ai",
+      "startDate": "2026-10-04",
+      "endDate": "2026-10-08",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "superEvent": {
+        "@type": "Event",
+        "name": "MICCAI 2026"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Division for Computational Radiology & Clinical AI (CCIBonn), University Hospital Bonn",
+        "url": "https://ccibonn.ai"
+      },
+      "about": {
+        "@type": "Dataset",
+        "name": "HEADLINE Dataset",
+        "description": "Large-scale collection of real-world non-contrast head CT scans paired with radiologist-authored clinical reports, covering the full spectrum of emergency neuroradiology findings."
+      }
+    }
+    </script>
     <style>
+      /* --- DESIGN TOKENS - edit these to retheme the whole site --- */
       :root {
-        --bg:           #080d13;
-        --surface:      #101820;
-        --border:       rgba(255,255,255,0.07);
-        --text:         #dde4ed;
-        --muted:        #94a8bc;
-        --accent:       #3b9eff;
-        --accent-glow:  rgba(59, 158, 255, 0.18);
+        --bg:           #f5f7fa;
+        --surface:      #ffffff;
+        --surface-2:    #edf0f5;
+        --border:       rgba(0,0,0,0.09);
+        --text:         #0d1822;
+        --muted:        #52677a;
+        --accent:       #1a78d0;
+        --accent-glow:  rgba(26, 120, 208, 0.15);
+        --accent-soft:  rgba(26, 120, 208, 0.08);
+        --gold:         #b8861a;
+        --gold-soft:    rgba(184, 134, 26, 0.10);
+
+        --radius-sm:    6px;
+        --radius:       12px;
+        --radius-lg:    20px;
+
+        --max:          56rem;
+        --pad:          clamp(1.25rem, 5vw, 2.5rem);
 
         --font-display: 'DM Serif Display', Georgia, serif;
         --font-body:    'DM Sans', sans-serif;
@@ -26,6 +76,17 @@
       }
 
       * { box-sizing: border-box; margin: 0; }
+      html { scroll-behavior: smooth; }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px; height: 1px;
+        padding: 0; margin: -1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        border: 0;
+      }
 
       body {
         font-family: var(--font-body);
@@ -34,85 +95,806 @@
         color: var(--text);
         background: var(--bg);
         -webkit-font-smoothing: antialiased;
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: clamp(2rem, 8vw, 4rem) clamp(1.25rem, 5vw, 2.5rem);
-        text-align: center;
+        overflow-x: hidden;
       }
 
-      .logo {
-        width: clamp(120px, 20vw, 180px);
-        margin-bottom: 2.5rem;
+      a { color: var(--accent); text-decoration: underline; }
+      code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent); background: var(--accent-soft); padding: 0.1em 0.4em; border-radius: 4px; }
+      a:hover { opacity: 0.8; }
+
+      /* --- LAYOUT --- */
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding-inline: var(--pad);
+      }
+
+      /* --- NAV --- */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #040c1a;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.85rem;
+      }
+
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        color: #dde4ed;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+
+      .nav-logo span { color: var(--accent); }
+
+      .nav-links {
+        display: flex;
+        gap: clamp(0.5rem, 1.5vw, 1.25rem);
+        list-style: none;
+        padding: 0;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: #94a8bc;
+        transition: color 0.2s;
+        white-space: nowrap;
+        text-decoration: none;
+      }
+
+      .nav-links a:hover { color: #dde4ed; text-decoration: none; opacity: 1; }
+
+      .nav-links a.btn-primary { color: #fff; }
+      .nav-links a.btn-primary:hover { color: #fff; }
+
+      /* --- MOBILE NAV --- */
+      .nav-check { display: none; }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        z-index: 101;
+      }
+
+      .nav-toggle span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: #94a8bc;
+        border-radius: 2px;
+        transition: transform 0.25s, opacity 0.25s, background 0.2s;
+      }
+
+      .nav-toggle:hover span { background: #dde4ed; }
+
+      @media (max-width: 640px) {
+        .nav-toggle { display: flex; }
+
+        .nav-links {
+          position: fixed;
+          top: 0; left: 0; right: 0;
+          background: #040c1a;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          padding: 4.5rem var(--pad) 2rem;
+          transform: translateY(-110%);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 99;
+          flex-wrap: nowrap;
+          border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .nav-links li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .nav-links li:last-child { border-bottom: none; }
+        .nav-links a { display: block; padding: 0.9rem 0; font-size: 0.9rem; }
+
+        .nav-links .btn-primary {
+          margin-top: 0.75rem;
+          width: 100%;
+          text-align: center;
+          padding: 0.65rem 1rem !important;
+          font-size: 0.9rem !important;
+        }
+
+        .nav-check:checked ~ .nav-links { transform: translateY(0); }
+
+        .nav-check:checked ~ .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-check:checked ~ .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-check:checked ~ .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      }
+
+      /* --- HERO LOGOS --- */
+      .hero-logos {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-logos img { height: 80px; display: block; }
+
+      @media (max-width: 480px) {
+        .hero-logos {
+          gap: 1.5rem;
+          justify-content: center;
+        }
+        .hero-logos img { height: 52px; }
+      }
+
+      /* --- HERO --- */
+      header {
+        padding-block-start: clamp(4rem, 12vw, 7rem);
+        padding-block-end: clamp(1.5rem, 4vw, 2.5rem);
+        position: relative;
+        overflow: hidden;
+        background: #040c1a;
+      }
+
+      header h1 { color: #dde4ed; }
+      header .hero-sub { color: #dde4ed; }
+      header .hero-sub-secondary { color: #94a8bc; }
+      header .btn-ghost { color: #94a8bc; border-color: rgba(255,255,255,0.12); }
+      header .btn-ghost:hover { color: #dde4ed; border-color: rgba(255,255,255,0.25); }
+
+      /* subtle radial glow behind hero */
+      header::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 60% 60% at 15% 50%, rgba(26,120,208,0.07) 0%, transparent 70%),
+          radial-gradient(ellipse 40% 40% at 80% 20%, rgba(232,184,75,0.05) 0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      /* scanline texture */
+      header::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.015) 0px,
+          rgba(255,255,255,0.015) 1px,
+          transparent 1px,
+          transparent 3px
+        );
+        pointer-events: none;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid rgba(26,120,208,0.25);
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        margin-bottom: 1.75rem;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .hero-badge::before {
+        content: '';
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 6px var(--accent);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
       }
 
       h1 {
         font-family: var(--font-display);
-        font-size: clamp(2rem, 6vw, 3rem);
+        font-size: clamp(3rem, 9vw, 5.5rem);
         font-weight: 400;
-        letter-spacing: -0.01em;
-        margin-bottom: 1rem;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.2em;
+        animation: fadeUp 0.6s 0.1s ease both;
       }
 
-      .subtitle {
+      h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .hero-sub {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        color: var(--text);
+        max-width: 44ch;
+        margin-bottom: 0.5rem;
+        font-weight: 400;
+        animation: fadeUp 0.6s 0.2s ease both;
+      }
+
+      .hero-sub-secondary {
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
         color: var(--muted);
-        max-width: 36rem;
-        margin-bottom: 2rem;
+        max-width: 52ch;
+        margin-bottom: 2.25rem;
+        font-weight: 300;
+        animation: fadeUp 0.6s 0.25s ease both;
       }
 
-      .badge {
+      .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        animation: fadeUp 0.6s 0.3s ease both;
+      }
+
+      .btn {
         display: inline-block;
-        font-family: var(--font-mono);
-        font-size: 0.78rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--accent);
-        background: var(--accent-glow);
-        border: 1px solid rgba(59, 158, 255, 0.25);
-        border-radius: 100px;
-        padding: 0.35em 1em;
-        margin-bottom: 2.5rem;
-      }
-
-      .divider {
-        width: 3rem;
-        height: 1px;
-        background: var(--border);
-        margin: 0 auto 2rem;
-      }
-
-      .footer-note {
-        font-size: 0.85rem;
-        color: var(--muted);
-      }
-
-      .footer-note a {
-        color: var(--accent);
+        padding: 0.65rem 1.35rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        cursor: pointer;
+        border: none;
         text-decoration: none;
       }
 
-      .footer-note a:hover { text-decoration: underline; }
+      a.btn, a.btn:hover { text-decoration: none; }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(26,120,208,0.2);
+      }
+
+      .btn-primary:hover {
+        background: #2589e0;
+        text-decoration: none;
+        box-shadow: 0 0 28px rgba(26,120,208,0.35);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: rgba(0,0,0,0.18);
+        text-decoration: none;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* --- SECTIONS --- */
+      main { padding-block-start: clamp(1rem, 3vw, 1.5rem); padding-block-end: clamp(2rem, 6vw, 3.5rem); }
+
+      section {
+        margin-bottom: clamp(3rem, 7vw, 5rem);
+        scroll-margin-top: 4rem;
+      }
+
+
+      h2 {
+        font-family: var(--font-body);
+        font-size: clamp(1.3rem, 3.5vw, 1.75rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.25rem;
+        line-height: 1.2;
+      }
+
+      p { color: var(--muted); margin-bottom: 1rem; }
+      p:last-child { margin-bottom: 0; }
+
+      /* --- CARD --- */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: clamp(1.25rem, 3vw, 1.75rem);
+      }
+
+      .card + .card { margin-top: 1rem; }
+
+      /* --- TIMELINE --- */
+      .timeline {
+        position: relative;
+        padding-left: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 100%);
+      }
+
+      .tl-item {
+        position: relative;
+        padding: 1rem 0 1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .tl-item:last-child { border-bottom: none; }
+
+      .tl-item::before {
+        content: '';
+        position: absolute;
+        left: -1.75rem;
+        top: 1.35rem;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 8px rgba(26,120,208,0.5);
+        border: 2px solid var(--bg);
+      }
+
+      .tl-item.past::before { background: var(--muted); box-shadow: none; }
+
+      .tl-date {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        margin-bottom: 0.15rem;
+      }
+
+      .tl-title {
+        font-weight: 500;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .tl-desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
+      /* --- TASKS GRID --- */
+      .tasks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+      }
+
+      .task-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+
+      .task-card:hover { border-color: rgba(26,120,208,0.3); }
+
+      .task-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+      }
+
+      .task-title {
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+
+      .task-desc { color: var(--muted); }
+
+      /* --- FAQ --- */
+      .faq-list { display: flex; flex-direction: column; gap: 0; }
+
+      details {
+        border-bottom: 1px solid var(--border);
+      }
+
+      details:first-child { border-top: 1px solid var(--border); }
+
+      summary {
+        cursor: pointer;
+        padding: 1rem 0;
+        font-weight: 500;
+        color: var(--text);
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        user-select: none;
+      }
+
+      summary::-webkit-details-marker { display: none; }
+
+      summary::after {
+        content: '+';
+        font-size: 1.2rem;
+        color: var(--accent);
+        flex-shrink: 0;
+        transition: transform 0.2s;
+        font-weight: 300;
+      }
+
+      details[open] summary::after { transform: rotate(45deg); }
+
+      .faq-body {
+        padding-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      /* --- REGISTRATION --- */
+      .reg-card {
+        background: var(--surface-2);
+        border: 1px solid rgba(26,120,208,0.2);
+        border-radius: var(--radius-lg);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      @media (max-width: 520px) {
+        .reg-card { grid-template-columns: 1fr; }
+      }
+
+      .reg-title {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+
+
+      /* --- FOOTER --- */
+      footer {
+        background: #040c1a;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        padding-block: clamp(1.5rem, 4vw, 2.25rem);
+        font-size: 0.8rem;
+        color: #94a8bc;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        color: #dde4ed;
+      }
     </style>
   </head>
   <body>
-    <img src="images/logo-transparent.png" alt="Headline MICCAI Challenge logo" class="logo" />
 
-    <div class="badge">Coming Soon</div>
+    <!-- --- NAVIGATION --- -->
+    <nav>
+      <div class="wrap nav-inner">
+        <a href="./" style="display:block; line-height:0;"><img src="images/logo-transparent.png" alt="Headline logo" style="height: 30px; display: block;" /></a>
+        <input type="checkbox" id="nav-open" class="nav-check" aria-hidden="true" />
+        <label class="nav-toggle" for="nav-open" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </label>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#timeline">Key Dates</a></li>
+          <li><a href="#data">Data</a></li>
+          <li><a href="#evaluation">Evaluation</a></li>
+          <li><a href="#updates">Updates</a></li>
+          <li><a href="#organisers">Organisers</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="signup/" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em;">Register</a></li>
+        </ul>
+      </div>
+    </nav>
 
-    <h1>Headline Challenge — MICCAI 2026</h1>
+    <!-- --- HERO --- -->
+    <header>
+      <div class="wrap">
+        <h1 class="visually-hidden">Headline – MICCAI 2026 Challenge: Automated Head CT Radiology Report Generation</h1>
+        <div class="hero-logos">
+          <img src="images/logo-transparent.png" alt="Headline logo" />
+          <img src="images/miccai2026-mobile-logo.png" alt="MICCAI 2026 logo" />
+        </div>
+        <p class="hero-sub">
+          Automated <strong>radiology report generation</strong> from 3D head CT scans.
+        </p>
+        <p class="hero-sub-secondary">
+          A dedicated benchmark at MICCAI 2026 to push the frontier of clinical NLP and medical image understanding.
+        </p>
 
-    <p class="subtitle">
-      A benchmark challenge on automated radiology report generation from 3D head CT scans.
-      The site is under construction — check back soon.
-    </p>
+        <div class="hero-cta">
+          <a href="signup/" class="btn btn-primary">Register Now</a>
+          <a href="#about" class="btn btn-ghost">Learn More</a>
+        </div>
+      </div>
+    </header>
 
-    <div class="divider"></div>
+    <main id="content">
+      <div class="wrap">
 
-    <p class="footer-note">
-      Questions? Contact us at
-      <a href="mailto:headline@ccibonn.ai">headline@ccibonn.ai</a>
-    </p>
+        <!-- --- ABOUT --- -->
+        <section id="about">
+          <h2>About the Challenge</h2>
+          <div class="card">
+            <p>
+              Radiological reporting of non-contrast head CT scans is a cornerstone of acute neurological care.
+              In emergency settings, clinicians rely on fast, precise, and comprehensive reports to guide
+              life-critical decisions. Yet this process remains time-intensive and highly dependent on expert
+              interpretation.
+            </p>
+            <p>
+              The HEADLINE MICCAI 2026 challenge introduces a dedicated benchmark for automated report
+              generation from 3D head CT scans using Vision-Language Models.
+            </p>
+          </div>
+        </section>
+
+        <!-- --- KEY DATES --- -->
+        <section id="timeline">
+          <h2>Key Dates</h2>
+          <div class="card">
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">May 1, 2026</div>
+                <div class="tl-title">Training data release</div>
+                <div class="tl-desc">Beginning of the release of the training dataset.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">June 1, 2026</div>
+                <div class="tl-title">Validation dataset release</div>
+                <div class="tl-desc">Release of the validation dataset.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">June 29, 2026</div>
+                <div class="tl-title">Submission system opens</div>
+                <div class="tl-desc">Submission system opens for sanity check.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">July 15, 2026</div>
+                <div class="tl-title">Final submission deadline</div>
+                <div class="tl-desc">All final docker submissions must be uploaded by this date.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">August 2026</div>
+                <div class="tl-title">Evaluation phase complete</div>
+                <div class="tl-desc">The top 3 teams will be announced, and they will be invited to present at MICCAI 2026.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">October 4 / October 8, 2026</div>
+                <div class="tl-title">MICCAI 2026</div>
+                <div class="tl-desc">Challenge session and announcement of challenge winners.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- --- DATA & TASKS --- -->
+        <section id="data">
+          <h2>Dataset &amp; Tasks</h2>
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <p>
+              The HEADLINE dataset comprises a large-scale collection of real-world, non-contrast head CT
+              scans paired with corresponding radiologist-authored clinical reports. All cases originate from
+              routine clinical practice and capture the full spectrum and complexity of emergency neuroradiology,
+              including both normal findings and a wide range of pathologies such as haemorrhage, ischaemia,
+              trauma, and tumours.
+            </p>
+            <p>
+              Each case includes the complete 3D volumetric CT scan with soft tissue and bone reconstructions,
+              reflecting standard clinical reading conditions. The reference standard is defined by
+              expert-validated radiology reports, ensuring a high level of diagnostic accuracy.
+            </p>
+            <p>
+              All data undergo rigorous de-identification and quality control. The dataset is specifically
+              designed to reflect real-world variability in imaging protocols, scanner types, and reporting
+              styles, thereby enabling the development of robust, generalisable, and clinically relevant AI
+              systems.
+            </p>
+          </div>
+          <div class="tasks-grid">
+            <div class="task-card">
+              <div class="task-title">Task: Report Generation</div>
+              <p class="task-desc">
+                Given a full 3D volumetric CT image, models must produce a clinically accurate, coherent,
+                and structured free-text report - identifying and describing relevant findings such as
+                haemorrhage, infarction, fractures, or mass lesions, along with their anatomical location,
+                extent, and clinical significance.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- EVALUATION -->
+        <section id="evaluation">
+          <h2>Evaluation Metrics</h2>
+          <div class="card" style="margin-bottom: 1.25rem;">
+            <p>
+              Submissions are evaluated using a two-stage, clinically grounded framework combining automated
+              metrics and expert review. This hybrid evaluation ensures that top-ranking models are not only
+              linguistically strong, but also clinically safe and meaningful.
+            </p>
+            <p>
+              In the <strong>first stage</strong>, all models are assessed using a
+              weighted composite score based on: <code>BERTScore (F1)</code>,
+              <code>METEOR</code>, <code>ROUGE-L</code>,
+              and <code>BLEU-4</code>. In the
+              <strong>second stage</strong>, the top-performing models are evaluated
+              by board-certified radiologists using a Clinical Utility Score, focusing on clinical accuracy,
+              completeness, and potential for harm.
+            </p>
+          </div>
+        </section>
+
+        <!-- --- REGISTRATION --- -->
+        <section id="registration">
+          <h2>Register</h2>
+          <div class="reg-card">
+            <div>
+              <!-- <div class="reg-title">Sign up for updates</div> -->
+              <p style="margin-bottom: 0;">
+                Sign up now to be notified when the data is released. Please read the <a href="rules/">challenge rules</a> before registering.
+              </p>
+            </div>
+            <a href="signup/" class="btn btn-primary" style="white-space: nowrap;">Register →</a>
+          </div>
+        </section>
+
+        <!-- --- UPDATES --- -->
+        <section id="updates">
+          <h2>Updates</h2>
+          <div class="card">
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">April 2026</div>
+                <div class="tl-title">Website launched</div>
+                <div class="tl-desc">The Headline challenge website is now live. Registration is open.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- --- ORGANISERS --- -->
+        <section id="organisers">
+          <h2>Organisers</h2>
+          <div class="card">
+            <p>
+              The HEADLINE challenge is organised by the <a href="https://ccibonn.ai">Division for Computational Radiology &amp; Clinical AI (CCIBonn)</a> at the University Hospital Bonn, Germany. The team combines expertise in neuroradiology, clinical research, and medical AI to ensure strong clinical relevance and methodological rigour.
+            </p>
+            <p style="font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">Organising Team</p>
+            <p>
+              Martha Foltyn-Dumitru, MD &ensp;&middot;&ensp; Ricky Walsh, PhD &ensp;&middot;&ensp; Tanuja Jayas, M.Tech &ensp;&middot;&ensp; Samuel Kwong, MSc &ensp;&middot;&ensp; Ritwik Ghosh, MSc &ensp;&middot;&ensp; Alexander Radbruch, MD &ensp;&middot;&ensp; Gianluca Brugnara, MD &ensp;&middot;&ensp; Aditya Rastogi, PhD &ensp;&middot;&ensp; Kai Schlamp, MD &ensp;&middot;&ensp; Philipp Vollmuth, MD
+            </p>
+          </div>
+        </section>
+
+        <!-- --- FAQ --- -->
+        <section id="faq">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <details>
+              <summary>Who can participate?</summary>
+              <p class="faq-body">
+                The challenge is open to researchers, clinicians, and industry participants from both academia
+                and commercial organisations. Interdisciplinary teams are highly encouraged.
+              </p>
+            </details>
+            <details>
+              <summary>Is the dataset publicly available?</summary>
+              <p class="faq-body">
+                The dataset is not publicly available. After registration, participants will receive a Data
+                Transfer and Usage Agreement (DUA). Signing this agreement is mandatory to gain access to
+                the dataset and participate in the challenge. Once the signed agreement has been reviewed
+                and approved, participants will receive access to download the training dataset. The dataset
+                is provided exclusively for use within the scope of this challenge and must not be used for
+                any commercial purposes.
+              </p>
+            </details>
+            <details>
+              <summary>Can I use external data or pre-trained models?</summary>
+              <p class="faq-body">
+                Yes. Participants are allowed to use publicly available external datasets and pre-trained
+                models. This includes foundation models and open-source resources, as long as they are
+                accessible to all participants at the time of the challenge.
+              </p>
+            </details>
+            <details>
+              <summary>What are the computational resource requirements?</summary>
+              <p class="faq-body">
+                All submissions must be provided as Docker containers and will be executed on the standardised
+                infrastructure of the evaluation platform. Models need to run within predefined limits
+                of runtime, memory, and compute resources. Submissions exceeding these limits may be
+                terminated and treated as failed cases. This setup ensures a fair, reproducible, and secure
+                evaluation environment for all participants. The detailed specifications of the computational
+                constraints will be published here in the coming days.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <!-- --- CONTACT --- -->
+        <section id="contact">
+          <h2>Get in Touch</h2>
+          <p>For questions or enquiries, email us at <a id="team-email">headline <!-- --> @ccibonn.ai</a>.
+          <script>
+            const el = document.getElementById('team-email');
+            el.href = 'mailto:' + 'headline' + '@' + 'ccibonn.ai';
+            el.textContent = 'headline' + '@' + 'ccibonn.ai';
+          </script></p>
+        </section>
+
+      </div><!-- /wrap -->
+    </main>
+
+    <!-- --- FOOTER --- -->
+    <footer>
+      <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; width:100%;">
+        <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+          <img src="images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
+        </div>
+        <span style="color: #94a8bc;">© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('.nav-links a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.getElementById('nav-open').checked = false;
+        });
+      });
+    </script>
   </body>
 </html>
