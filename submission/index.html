@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Submission guidelines and evaluation framework for the Headline MICCAI 2026 challenge on head CT radiology report generation." />
+
+    <title>Submission &amp; Evaluation – Headline MICCAI Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    
+    <style>
+      :root {
+        --bg:           #f5f7fa;
+        --surface:      #ffffff;
+        --surface-2:    #edf0f5;
+        --border:       rgba(0,0,0,0.09);
+        --text:         #0d1822;
+        --muted:        #52677a;
+        --accent:       #1a78d0;
+        --accent-glow:  rgba(26, 120, 208, 0.15);
+        --accent-soft:  rgba(26, 120, 208, 0.08);
+
+        --max:          56rem;
+        --pad:          clamp(1.25rem, 5vw, 2.5rem);
+
+        --font-display: 'DM Serif Display', Georgia, serif;
+        --font-body:    'DM Sans', sans-serif;
+        --font-mono:    'DM Mono', monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--font-body);
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        line-height: 1.65;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+        overflow-x: hidden;
+      }
+
+      a { color: var(--accent); text-decoration: underline; }
+      a:hover { opacity: 0.8; }
+      code { font-family: var(--font-mono); font-size: 0.88em; color: var(--accent); background: var(--accent-soft); padding: 0.1em 0.4em; border-radius: 4px; }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding-inline: var(--pad);
+      }
+
+      /* --- NAV --- */
+      nav {
+        background: #040c1a;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.85rem;
+      }
+
+      .nav-inner img { display: block; }
+
+      .back-link {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: #94a8bc;
+        text-decoration: none;
+        transition: color 0.2s;
+        white-space: nowrap;
+      }
+
+      .back-link:hover { color: #dde4ed; text-decoration: none; opacity: 1; }
+
+      /* --- CONTENT --- */
+      main {
+        flex: 1;
+        padding-block: clamp(2.5rem, 8vw, 4rem);
+      }
+
+      .page-header {
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .page-header p {
+        color: var(--muted);
+        margin-top: 0.5rem;
+        max-width: 44ch;
+      }
+
+      h1 {
+        font-family: var(--font-body);
+        font-size: clamp(1.75rem, 5vw, 2.25rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+
+      section {
+        margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+      }
+
+      h2 {
+        font-family: var(--font-body);
+        font-size: 1.05rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h3 {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h3:first-child { margin-top: 0; }
+
+      p { color: var(--muted); margin-bottom: 0.85rem; }
+      p:last-child { margin-bottom: 0; }
+
+      ul, ol {
+        color: var(--muted);
+        padding-left: 1.5rem;
+        margin-bottom: 0.85rem;
+      }
+
+      ul:last-child, ol:last-child { margin-bottom: 0; }
+
+      li { margin-bottom: 0.4rem; }
+      li:last-child { margin-bottom: 0; }
+
+      strong { color: var(--text); font-weight: 500; }
+
+      .metric { color: var(--accent); }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: clamp(1.25rem, 3vw, 1.75rem);
+      }
+
+      .highlight {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        padding: 0.85rem 1.1rem;
+        border-radius: 0 6px 6px 0;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .highlight p:last-child { margin-bottom: 0; }
+
+      .formula-display {
+        overflow-x: auto;
+        padding: 0.5rem 0;
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .formula-display .formula {
+        font-family: var(--font-body);
+      }
+
+      .formula sub {
+        font-size: 0.78em;
+        vertical-align: -0.2em;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background: #040c1a;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        padding-block: clamp(1.5rem, 4vw, 2.25rem);
+        font-size: 0.8rem;
+        color: #94a8bc;
+        margin-top: auto;
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        color: #dde4ed;
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="wrap nav-inner">
+        <a href="../" style="display:block; line-height:0;"><img src="../images/logo-transparent.png" alt="Headline logo" style="height: 30px;" /></a>
+        <a class="back-link" href="../">← Back to main site</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="wrap">
+
+        <div class="page-header">
+          <h1>Submission &amp; Evaluation</h1>
+          <p>
+            Complete guidelines for submitting to the HEADLINE challenge, including our hybrid evaluation framework and computational requirements.
+          </p>
+        </div>
+
+        <!-- --- RANKING & EVALUATION FRAMEWORK --- -->
+        <section id="evaluation">
+          <h2>Ranking &amp; Evaluation Framework</h2>
+          
+          <p>
+            The challenge uses a two-stage hybrid ranking system to prioritise both linguistic quality and clinical safety. This ensures that top-ranking models are not only linguistically strong, but also clinically safe and meaningful.
+          </p>
+
+          <h3>Stage 1: Automated Screening</h3>
+          
+          <p>
+            All submissions are ranked via a Weighted Composite Score <span class="formula">S<sub>Auto</sub></span>:
+          </p>
+          
+          <ul>
+            <li><strong>BERTScore (70%)</strong>: Measures semantic similarity using contextual embeddings.</li>
+            <li><strong>Auxiliary metrics (30%)</strong>: METEOR, ROUGE-L, and BLEU-4 to assess structural integrity.</li>
+          </ul>
+
+          <p>
+            The automated screening provides an initial ranking that reflects how well submissions capture the linguistic and semantic content of reference reports.
+          </p>
+
+          <h3>Stage 2: Expert Clinical Review</h3>
+          
+          <p>
+            The top 5 teams advance to a manual review by board-certified radiologists who calculate a Clinical Utility Score <span class="formula">S<sub>Human</sub></span>. This score evaluates:
+          </p>
+          
+          <ul>
+            <li><strong>Attribution/Hallucination</strong>: Information not supported by the image.</li>
+            <li><strong>Completeness</strong>: Missing key findings (omissions).</li>
+            <li><strong>Safety</strong>: Potential for patient harm.</li>
+          </ul>
+
+          <p>
+            Expert review ensures that the top solutions are clinically sound and safe for potential real-world application.
+          </p>
+
+          <h3>Final Score Calculation</h3>
+          
+          <p>
+            The final ranking is determined by:
+          </p>
+          
+          <div class="formula-display"><span class="formula">Final Score = 0.5 × S<sub>Auto</sub> + 0.5 × S<sub>Human</sub></span></div>
+
+          <div class="highlight">
+            <p>
+              <strong>Important:</strong> If a report fails to be generated for a given case, the submission will be assigned a score of 0 for that case. It is critical that your submission gracefully handles all cases and generates output for every test image.
+            </p>
+          </div>
+        </section>
+
+        <!-- --- SUBMISSION GUIDELINES --- -->
+        <section id="guidelines">
+          <h2>Submission Guidelines</h2>
+          
+          <p>
+            Submission will be handled through <a href="https://grand-challenge.org" target="_blank">grand-challenge.org</a>, and final evaluation on the test set will use a Docker container of the algorithms submitted by participants. There are three separate submission phases:
+          </p>
+
+          <h3>1. Validation Phase</h3>
+          
+          <p>
+            Participants will be supplied 500 validation cases without ground-truth reports. They will then generate reports for these cases and submit the predictions for evaluation. This will form an interim leaderboard during the challenge.
+          </p>
+          
+          <ul>
+            <li>Validation submissions are limited to <strong>three per team</strong>.</li>
+            <li>Results from the validation phase can be used to refine your method before final submission.</li>
+            <li>The validation leaderboard provides real-time feedback on performance.</li>
+          </ul>
+
+          <h3>2. Sanity Check</h3>
+          
+          <p>
+            To ensure that the final test phase runs smoothly, participants will be asked to submit a Docker container of their algorithm for an initial sanity check. The containers will then be executed on one case for inference.
+          </p>
+          
+          <div class="highlight">
+            <p>
+              <strong>This step is important</strong> to check that your container runs without problems on the Grand Challenge infrastructure, given the computational constraints outlined below. We strongly recommend completing this step before final submission to avoid runtime failures.
+            </p>
+          </div>
+
+          <h3>3. Test Phase</h3>
+          
+          <p>
+            Participants will submit a Docker container of their algorithm, which will be executed on all 500 test cases.
+          </p>
+          
+          <ul>
+            <li>Each test case will be processed according to the computational constraints specified below.</li>
+            <li>Any cases where a report is not generated will receive a score of 0.</li>
+            <li>Final results will form the official challenge leaderboard.</li>
+          </ul>
+
+          <div class="highlight">
+            <p>
+              Please ensure your submission complies with the computation requirements and that you submit your method for an initial 'sanity check' as described above.
+            </p>
+          </div>
+        </section>
+
+        <!-- --- COMPUTATION REQUIREMENTS --- -->
+        <section id="requirements">
+          <h2>Computation Requirements</h2>
+          
+          <p>
+            Inference and evaluation will be run on Grand Challenge, and so submissions will be bound by associated computational constraints.
+          </p>
+
+          <h3>Hardware Specifications</h3>
+          
+          <ul>
+            <li><strong>Memory (RAM)</strong>: 32 GB DRAM</li>
+            <li><strong>GPU</strong>: Either NVIDIA T4 (16 GB VRAM) or A10G (24 GB VRAM)</li>
+            <li><strong>Storage</strong>: Either 225 GB (with T4) or 450GB (with A10G)</li>
+          </ul>
+
+          <h3>Runtime Constraints</h3>
+          
+          <p>
+            <strong>Maximum allowed runtime per case: 6 minutes</strong>
+          </p>
+          
+          <p>
+            This time includes model loading, data loading and preprocessing, inference, and all associated post-processing and output generation.
+            </p>
+          <p>
+            If a case exceeds the 6-minute limit, the process will be terminated and that case will receive a score of 0.
+          </p>
+
+          <h3>Further Resources</h3>
+          
+          <p>
+            For detailed information about the Grand Challenge runtime environment, submission process, and Docker containerisation best practices, please refer to the <a href="https://grand-challenge.org/documentation/runtime-environment/" target="_blank">Grand Challenge documentation</a>.
+          </p>
+        </section>
+
+        <!-- --- CHALLENGE PAPER --- -->
+        <section id="paper">
+          <h2>Challenge Details</h2>
+          
+          <p>
+            For more details about the challenge, dataset, and evaluation methodology, please refer to our challenge submission to MICCAI: <a href="https://zenodo.org/records/19851826" target="_blank">Challenge Paper on Zenodo</a>.
+          </p>
+        </section>
+
+      </div><!-- /wrap -->
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <img src="../images/logo-transparent.png" alt="Headline logo" style="height: 36px; display: block;" />
+        <span>© 2026 CCIBonn, University Hospital Bonn. MICCAI 2026 Challenge.</span>
+      </div>
+    </footer>
+
+  </body>
+</html>

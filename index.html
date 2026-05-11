@@ -163,6 +163,16 @@
       .nav-links a.btn-primary { color: #fff; }
       .nav-links a.btn-primary:hover { color: #fff; }
 
+      .nav-links a.btn-subtle {
+        border: 1px solid rgba(148, 168, 188, 0.4);
+        padding: 0.35rem 0.85rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .nav-links a.btn-subtle:hover {
+        border-color: rgba(148, 168, 188, 0.7);
+      }
+
       /* --- MOBILE NAV --- */
       .nav-check { display: none; }
 
@@ -213,6 +223,14 @@
         .nav-links a { display: block; padding: 0.9rem 0; font-size: 0.9rem; }
 
         .nav-links .btn-primary {
+          margin-top: 0.75rem;
+          width: 100%;
+          text-align: center;
+          padding: 0.65rem 1rem !important;
+          font-size: 0.9rem !important;
+        }
+
+        .nav-links .btn-subtle {
           margin-top: 0.75rem;
           width: 100%;
           text-align: center;
@@ -393,6 +411,19 @@
       .btn-ghost:hover {
         color: var(--text);
         border-color: rgba(0,0,0,0.18);
+        text-decoration: none;
+      }
+
+      .btn-subtle {
+        background: transparent;
+        color: #6f8092;
+        border: 1px solid var(--border);
+      }
+
+      .btn-subtle:hover {
+        color: #516173;
+        border-color: rgba(0, 0, 0, 0.18);
+        background: rgba(0, 0, 0, 0.02);
         text-decoration: none;
       }
 
@@ -628,14 +659,12 @@
           <span></span><span></span><span></span>
         </label>
         <ul class="nav-links">
-          <li><a href="#about">About</a></li>
           <li><a href="#timeline">Key Dates</a></li>
           <li><a href="#data">Data</a></li>
           <li><a href="#evaluation">Evaluation</a></li>
-          <li><a href="#updates">Updates</a></li>
           <li><a href="#organisers">Organisers</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="submission/" class="btn btn-subtle" style="padding: 0.35rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em;">Guidelines</a></li>
           <li><a href="signup/" class="btn btn-primary" style="padding: 0.35rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em;">Register</a></li>
         </ul>
       </div>
@@ -658,6 +687,7 @@
 
         <div class="hero-cta">
           <a href="signup/" class="btn btn-primary">Register Now</a>
+          <a href="submission/" class="btn btn-ghost">Submission Guide</a>
           <a href="#about" class="btn btn-ghost">Learn More</a>
         </div>
       </div>
@@ -734,6 +764,9 @@
               trauma, and tumours.
             </p>
             <p>
+              <strong>Dataset composition:</strong> Over 17,000 training cases, 500 validation cases, and 500 test cases.
+            </p>
+            <p>
               Each case includes the complete 3D volumetric CT scan with soft tissue and bone reconstructions,
               reflecting standard clinical reading conditions. The reference standard is defined by
               expert-validated radiology reports, ensuring a high level of diagnostic accuracy.
@@ -786,24 +819,10 @@
             <div>
               <!-- <div class="reg-title">Sign up for updates</div> -->
               <p style="margin-bottom: 0;">
-                Sign up now to be notified when the data is released. Please read the <a href="rules/">challenge rules</a> before registering.
+              Sign up now! Please read the <a href="rules/">challenge rules</a> before registering.
               </p>
             </div>
             <a href="signup/" class="btn btn-primary" style="white-space: nowrap;">Register →</a>
-          </div>
-        </section>
-
-        <!-- --- UPDATES --- -->
-        <section id="updates">
-          <h2>Updates</h2>
-          <div class="card">
-            <div class="timeline">
-              <div class="tl-item">
-                <div class="tl-date">April 2026</div>
-                <div class="tl-title">Website launched</div>
-                <div class="tl-desc">The Headline challenge website is now live. Registration is open.</div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -862,6 +881,25 @@
                 constraints will be published here in the coming days.
               </p>
             </details>
+          </div>
+        </section>
+
+        <!-- --- UPDATES --- -->
+        <section id="updates">
+          <h2>Updates</h2>
+          <div class="card">
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">May 9, 2026</div>
+                <div class="tl-title">First batch of training data released</div>
+                <div class="tl-desc">The first batch of the training dataset is now available to registered participants.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">April 2026</div>
+                <div class="tl-title">Website launched</div>
+                <div class="tl-desc">The Headline challenge website is now live. Registration is open.</div>
+              </div>
+            </div>
           </div>
         </section>
 
