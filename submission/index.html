@@ -175,6 +175,74 @@
 
       .highlight p:last-child { margin-bottom: 0; }
 
+      /* --- REGISTRATION STEPS --- */
+      .reg-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .reg-step {
+        background: var(--surface-2);
+        border: 1px solid rgba(26,120,208,0.2);
+        border-radius: 12px;
+        padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1.25rem;
+        align-items: center;
+      }
+
+      .reg-step-num {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .reg-step-body strong {
+        display: block;
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+        color: var(--text);
+      }
+
+      .reg-step-body p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .reg-step-action { flex-shrink: 0; }
+
+      .btn-primary {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        padding: 0.45rem 1rem;
+        border-radius: 6px;
+        white-space: nowrap;
+        transition: opacity 0.2s;
+      }
+      .btn-primary:hover { opacity: 0.85; color: #fff; }
+
+      @media (max-width: 540px) {
+        .reg-step { grid-template-columns: auto 1fr; }
+        .reg-step-action { grid-column: 2; }
+      }
+
       .formula-display {
         overflow-x: auto;
         padding: 0.5rem 0;
@@ -235,6 +303,61 @@
           </p>
         </div>
 
+        <!-- --- HOW TO PARTICIPATE --- -->
+        <section id="how-to-participate">
+          <h2>How to Participate</h2>
+          <div class="reg-steps">
+
+            <div class="reg-step">
+              <div class="reg-step-num">1</div>
+              <div class="reg-step-body">
+                <strong>Sign up for dataset access</strong>
+                <p>Register on the main site to receive access to the training data. Please read the <a href="../rules/">challenge rules</a> before registering.</p>
+              </div>
+              <div class="reg-step-action">
+                <a href="../signup/" class="btn-primary">Register →</a>
+              </div>
+            </div>
+
+            <div class="reg-step">
+              <div class="reg-step-num">2</div>
+              <div class="reg-step-body">
+                <strong>Submit your method</strong>
+                <p>Predictions and Docker containers are submitted via Grand Challenge. See the guidelines below for full details.</p>
+              </div>
+              <div class="reg-step-action">
+                <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener" class="btn-primary">Grand Challenge →</a>
+              </div>
+            </div>
+
+            <div class="reg-step">
+              <div class="reg-step-num">3</div>
+              <div class="reg-step-body">
+                <strong>Submit a short paper</strong>
+                <p>Describe your method on OpenReview. Link to the submission page coming soon.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- --- TASK --- -->
+        <section id="task">
+          <h2>Task</h2>
+          <p>
+            Given a full 3D CT image, models must produce a clinically accurate, coherent,
+            and structured free-text report - identifying and describing relevant findings such as
+            haemorrhage, infarction, fractures, or mass lesions, along with their anatomical location,
+            extent, and clinical significance.
+          </p>
+          <p>
+            The task is report generation at a <b>single timepoint</b>. Although there may be multiple studies 
+            per patient, these will be treated as independent cases for evaluation purposes. The 
+            correspondence between studies and patients is only provided in the training data as it 
+            may be useful during model development.
+          </p>
+        </section>
+
         <!-- --- RANKING & EVALUATION FRAMEWORK --- -->
         <section id="evaluation">
           <h2>Ranking &amp; Evaluation Framework</h2>
@@ -261,7 +384,7 @@
           <h3>Stage 2: Expert Clinical Review</h3>
           
           <p>
-            The top 5 teams advance to a manual review by board-certified radiologists who calculate a Clinical Utility Score <span class="formula">S<sub>Human</sub></span>. This score evaluates:
+            The top 5 teams advance to a manual review by board-certified radiologists who calculate a Clinical Utility Score <span class="formula">S<sub>Human</sub></span> on 50 test cases. This score evaluates:
           </p>
           
           <ul>
@@ -297,10 +420,10 @@
             Submission will be handled through <a href="https://headline26.grand-challenge.org/" target="_blank">headline26.grand-challenge.org</a>, and final evaluation on the test set will use a Docker container of the algorithms submitted by participants. There are three separate submission phases:
           </p>
 
-          <h3>1. Validation Phase</h3>
+          <h3>1. Validation Phase (predictions only)</h3>
           
           <p>
-            Participants will be supplied 500 validation cases without ground-truth reports. They will then generate reports for these cases and submit the predictions for evaluation. This will form an interim leaderboard during the challenge.
+            Participants will be supplied 500 validation cases without ground-truth reports. They will then generate reports for these cases and submit the <b>predictions</b> (i.e., generated reports) for evaluation. This will form an interim leaderboard during the challenge.
           </p>
           
           <ul>
@@ -309,10 +432,10 @@
             <li>The validation leaderboard provides real-time feedback on performance.</li>
           </ul>
 
-          <h3>2. Sanity Check</h3>
+          <h3>2. Sanity Check (container submission)</h3>
           
           <p>
-            To ensure that the final test phase runs smoothly, participants will be asked to submit a Docker container of their algorithm for an initial sanity check. The containers will then be executed on a single case for inference.
+            To ensure that the final test phase runs smoothly, participants will be asked to submit a <b>Docker container</b> of their algorithm for an initial sanity check. The containers will then be executed on a single case for inference.
           </p>
           
           <div class="highlight">
@@ -321,10 +444,10 @@
             </p>
           </div>
 
-          <h3>3. Test Phase</h3>
+          <h3>3. Test Phase (container submission)</h3>
           
           <p>
-            Participants will submit a Docker container of their algorithm, which will be executed on all 500 test cases.
+            Participants will submit a <b>Docker container</b> of their algorithm, which will be executed on all 500 test cases.
           </p>
           
           <ul>
@@ -351,22 +474,21 @@
           <h3>Hardware Specifications</h3>
           
           <ul>
-            <li><strong>Memory (RAM)</strong>: 32 GB DRAM</li>
+            <li><strong>Memory</strong>: 32 GB DRAM</li>
             <li><strong>GPU</strong>: Either NVIDIA T4 (16 GB VRAM) or A10G (24 GB VRAM)</li>
             <li><strong>Storage</strong>: Either 225 GB (with T4) or 450GB (with A10G)</li>
           </ul>
 
-          <h3>Runtime Constraints</h3>
-          
-          <p>
-            <strong>Maximum allowed runtime per case: 6 minutes</strong>
-          </p>
-          
+          <h3>Runtime Constraints: max 6 minutes per case</h3>
+
           <p>
             This time includes model loading, data loading and preprocessing, inference, and all associated post-processing and output generation.
             </p>
           <p>
-            If a case exceeds the 6-minute limit, the process will be terminated and that case will receive a score of 0.
+            If a case exceeds the 6-minute limit, the process will be terminated and that case will be scored 0.
+          </p>
+          <p> 
+            To reduce VRAM usage and runtime, we recommend considering <b>quantization</b> of the language model to 8-bit precision, which is relatively straightforward to implement using libraries such as <tt>bitsandbytes</tt>.
           </p>
 
           <h3>Further Resources</h3>
@@ -375,16 +497,6 @@
             For detailed information about the Grand Challenge runtime environment, submission process, and Docker containerisation best practices, please refer to the <a href="https://grand-challenge.org/documentation/runtime-environment/" target="_blank">Grand Challenge documentation</a>.
           </p>
         </section>
-
-        <!-- --- CHALLENGE PAPER --- -->
-        <section id="paper">
-          <h2>Challenge Details</h2>
-          
-          <p>
-            For more details about the challenge, dataset, and evaluation methodology, please refer to our challenge submission to MICCAI: <a href="https://zenodo.org/records/19851826" target="_blank">Challenge Paper on Zenodo</a>.
-          </p>
-        </section>
-
       </div><!-- /wrap -->
     </main>
 

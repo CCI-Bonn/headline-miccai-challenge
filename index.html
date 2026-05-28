@@ -604,19 +604,57 @@
       }
 
       /* --- REGISTRATION --- */
-      .reg-card {
+      .reg-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .reg-step {
         background: var(--surface-2);
         border: 1px solid rgba(26,120,208,0.2);
         border-radius: var(--radius-lg);
-        padding: clamp(1.5rem, 4vw, 2.5rem);
+        padding: clamp(1rem, 3vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 1.5rem;
+        grid-template-columns: auto 1fr auto;
+        gap: 1.25rem;
         align-items: center;
       }
 
-      @media (max-width: 520px) {
-        .reg-card { grid-template-columns: 1fr; }
+      .reg-step-num {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .reg-step-body strong {
+        display: block;
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .reg-step-body p {
+        margin: 0;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .reg-step-action {
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 540px) {
+        .reg-step { grid-template-columns: auto 1fr; }
+        .reg-step-action { grid-column: 2; }
       }
 
       .reg-title {
@@ -729,14 +767,29 @@
                 <div class="tl-desc">Release of the validation dataset.</div>
               </div>
               <div class="tl-item">
+                <div class="tl-date">June 15, 2026</div>
+                <div class="tl-title">Validation phase opens</div>
+                <div class="tl-desc">Planned start date for the validation & sanity check phases.</div>
+              </div>
+              <div class="tl-item">
                 <div class="tl-date">June 29, 2026</div>
-                <div class="tl-title">Submission system opens</div>
-                <div class="tl-desc">Submission system opens for sanity check.</div>
+                <div class="tl-title">Test phase opens</div>
+                <div class="tl-desc">Submission system opens for final Docker submission.</div>
               </div>
               <div class="tl-item">
                 <div class="tl-date">July 15, 2026</div>
                 <div class="tl-title">Final submission deadline</div>
-                <div class="tl-desc">All final docker submissions must be uploaded by this date.</div>
+                <div class="tl-desc">All final **Docker** submissions and **short papers** must be uploaded by this date.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">August 1, 2026</div>
+                <div class="tl-title">Reviews released</div>
+                <div class="tl-desc">The reviews of the short papers will be released to the authors.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-date">August 6, 2026</div>
+                <div class="tl-title">Revised short papers due</div>
+                <div class="tl-desc">Revised versions of the short papers (if applicable) must be submitted by this date.</div>
               </div>
               <div class="tl-item">
                 <div class="tl-date">August 2026</div>
@@ -764,7 +817,7 @@
               trauma, and tumours.
             </p>
             <p>
-              <strong>Dataset composition:</strong> Over 17,000 training cases, 500 validation cases, and 500 test cases.
+              <strong>Dataset composition:</strong> Over 16,000 training cases, 500 validation cases, and 500 test cases.
             </p>
             <p>
               Each case includes the complete 3D volumetric CT scan with soft tissue and bone reconstructions,
@@ -815,14 +868,38 @@
         <!-- --- REGISTRATION --- -->
         <section id="registration">
           <h2>Register</h2>
-          <div class="reg-card">
-            <div>
-              <!-- <div class="reg-title">Sign up for updates</div> -->
-              <p style="margin-bottom: 0;">
-              Sign up now! Please read the <a href="rules/">challenge rules</a> before registering.
-              </p>
+          <div class="reg-steps">
+
+            <div class="reg-step">
+              <div class="reg-step-num">1</div>
+              <div class="reg-step-body">
+                <strong>Sign up for dataset access</strong>
+                <p>Please read the <a href="rules/">challenge rules</a> before registering.</p>
+              </div>
+              <div class="reg-step-action">
+                <a href="signup/" class="btn btn-primary" style="white-space: nowrap;">Register →</a>
+              </div>
             </div>
-            <a href="signup/" class="btn btn-primary" style="white-space: nowrap;">Register →</a>
+
+            <div class="reg-step">
+              <div class="reg-step-num">2</div>
+              <div class="reg-step-body">
+                <strong>Submit your method</strong>
+                <p>Methods will be submitted via Grand Challenge once the submission period begins.</p>
+              </div>
+              <div class="reg-step-action">
+                <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener" class="btn btn-primary" style="white-space: nowrap;">Grand Challenge →</a>
+              </div>
+            </div>
+
+            <div class="reg-step">
+              <div class="reg-step-num">3</div>
+              <div class="reg-step-body">
+                <strong>Submit a short paper</strong>
+                <p>Describe your method on OpenReview. Link to the submission page coming soon.</p>
+              </div>
+            </div>
+
           </div>
         </section>
 
