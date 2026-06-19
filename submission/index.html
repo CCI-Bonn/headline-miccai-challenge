@@ -373,7 +373,7 @@
           </p>
           
           <ul>
-            <li><strong>BERTScore (70%)</strong>: Measures semantic similarity using contextual embeddings.</li>
+            <li><strong>BERTScore (70%)</strong>: Measures semantic similarity using contextual embeddings. We use the <code>microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract</code> model and apply a fixed rescaling so that random text receives a BERTScore of 0.</li>
             <li><strong>Auxiliary metrics (30%)</strong>: METEOR, ROUGE-L, and BLEU-4 to assess structural integrity.</li>
           </ul>
 
