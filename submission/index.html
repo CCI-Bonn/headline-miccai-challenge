@@ -474,18 +474,20 @@
           <h3>Hardware Specifications</h3>
           
           <ul>
-            <li><strong>Memory</strong>: 32 GB DRAM</li>
-            <li><strong>GPU</strong>: Either NVIDIA T4 (16 GB VRAM) or A10G (24 GB VRAM)</li>
+            <li><strong>Memory</strong>: 16 or 32 GB DRAM</li>
+            <li><strong>GPU</strong>: Either NVIDIA T4 (16 GB VRAM) or A10G (24 GB VRAM). Note that A10G has lower availability and may take up to 48 hours for resources to be assigned. Therefore, we recommend using the T4 for sanity checks and debugging.</li>
             <li><strong>Storage</strong>: Either 225 GB (with T4) or 450GB (with A10G)</li>
           </ul>
 
-          <h3>Runtime Constraints: max 6 minutes per case</h3>
+          <h3>Runtime Constraints</h3>
 
           <p>
-            This time includes model loading, data loading and preprocessing, inference, and all associated post-processing and output generation.
-            </p>
-          <p>
-            If a case exceeds the 6-minute limit, the process will be terminated and that case will be scored 0.
+            The algorithm container will process the test cases in predefined batches of between 2 and 4 studies, with a <b>maximum runtime of 20 minutes per batch</b>.
+            This time includes:
+            <ul>
+              <li><strong>Once per batch:</strong> mounting the model tarball and initialising the container (this can take 5 minutes for a ~16GB model tarball), loading model to the GPU.</li>
+              <li><strong>Per study:</strong> preprocessing, inference, and all associated post-processing and output generation.</li>
+            </ul>
           </p>
           <p> 
             To reduce VRAM usage and runtime, we recommend considering <b>quantization</b> of the language model to 8-bit precision, which is relatively straightforward to implement using libraries such as <tt>bitsandbytes</tt>.
@@ -493,6 +495,10 @@
 
           <h3>Further Resources</h3>
           
+          <p>
+            For starter code and details about the required inputs and outputs, etc. please refer to our <a href="https://github.com/CCI-Bonn/headline-miccai-challenge" target="_blank">starter kit GitHub repository</a>. Sample data for the sanity check will be released once the sanity check phase opens.
+          </p>
+
           <p>
             For detailed information about the Grand Challenge runtime environment, submission process, and Docker containerisation best practices, please refer to the <a href="https://grand-challenge.org/documentation/runtime-environment/" target="_blank">Grand Challenge documentation</a>.
           </p>
