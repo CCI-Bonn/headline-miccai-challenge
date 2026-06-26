@@ -513,6 +513,27 @@
         margin-bottom: 0.15rem;
       }
 
+      .tl-date-old {
+        color: #c86a42;
+        text-decoration: line-through;
+        text-decoration-thickness: 2px;
+        text-decoration-color: rgba(200, 106, 66, 0.7);
+      }
+
+      .tl-date-updated {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 0.45rem;
+        padding: 0.08rem 0.45rem;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #9d4d2a;
+        background: rgba(200, 106, 66, 0.12);
+      }
+
       .tl-title {
         font-weight: 500;
         color: var(--text);
@@ -772,14 +793,14 @@
                 <div class="tl-desc">Start of the validation phase.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">June 25, 2026 (planned)</div>
+                <div class="tl-date"><span class="tl-date-old">June 19, 2026</span>June 29, 2026</div>
                 <div class="tl-title">Sanity check phase opens</div>
                 <div class="tl-desc">Planned start date for the sanity check phase.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">June 29, 2026</div>
+                <div class="tl-date"><span class="tl-date-old">June 29, 2026</span>  July 1, 2026</div>
                 <div class="tl-title">Test phase opens</div>
-                <div class="tl-desc">Submission system opens for final Docker submission.</div>
+                <div class="tl-desc">Planned opening date for final Docker submission.</div>
               </div>
               <div class="tl-item">
                 <div class="tl-date">July 15, 2026</div>
@@ -802,8 +823,8 @@
                 <div class="tl-desc">The top 3 teams will be announced, and they will be invited to present at MICCAI 2026.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date">September 27 or October 1, 2026</div>
-                <div class="tl-title">MICCAI 2026</div>
+                <div class="tl-date">October 1, 2026 (1.30pm - 3.30pm)</div>
+                <div class="tl-title">MICCAI 2026 – Room Varsovie</div>
                 <div class="tl-desc">Challenge session and announcement of challenge winners.</div>
               </div>
             </div>
