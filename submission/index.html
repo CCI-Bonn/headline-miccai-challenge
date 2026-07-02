@@ -100,7 +100,7 @@
       .page-header p {
         color: var(--muted);
         margin-top: 0.5rem;
-        max-width: 44ch;
+        /* max-width: 54ch; */
       }
 
       h1 {
@@ -228,15 +228,34 @@
         background: var(--accent);
         color: #fff;
         text-decoration: none;
-        font-size: 0.82rem;
-        font-weight: 600;
-        letter-spacing: 0.03em;
-        padding: 0.45rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.65rem 1.35rem;
         border-radius: 6px;
         white-space: nowrap;
         transition: opacity 0.2s;
       }
       .btn-primary:hover { opacity: 0.85; color: #fff; }
+
+      .btn-teal, .btn-amber {
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.65rem 1.35rem;
+        border-radius: 6px;
+        white-space: nowrap;
+        transition: opacity 0.2s;
+      }
+      .btn-teal { background: #2c7d72; }
+      .btn-amber { background: #886830; }
+      .btn-teal:hover, .btn-amber:hover { opacity: 0.85; color: #fff; }
+
+      .reg-step.step-teal { border-color: rgba(44,125,114,0.32); }
+      .reg-step.step-amber { border-color: rgba(136,104,48,0.32); }
+      .reg-step-num.num-teal { background: #2c7d72; }
+      .reg-step-num.num-amber { background: #886830; }
 
       @media (max-width: 540px) {
         .reg-step { grid-template-columns: auto 1fr; }
@@ -299,7 +318,7 @@
         <div class="page-header">
           <h1>Submission &amp; Evaluation</h1>
           <p>
-            Complete guidelines for submitting to the HEADLINE challenge, including our hybrid evaluation framework and computational requirements.
+            Guidelines for submitting to the HEADLINE challenge, including our hybrid evaluation framework and computational requirements.
           </p>
         </div>
 
@@ -319,22 +338,25 @@
               </div>
             </div>
 
-            <div class="reg-step">
-              <div class="reg-step-num">2</div>
+            <div class="reg-step step-teal">
+              <div class="reg-step-num num-teal">2</div>
               <div class="reg-step-body">
                 <strong>Submit your method</strong>
                 <p>Predictions and Docker containers are submitted via Grand Challenge. See the guidelines below for full details.</p>
               </div>
               <div class="reg-step-action">
-                <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener" class="btn-primary">Grand Challenge →</a>
+                <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener" class="btn-teal">Grand Challenge →</a>
               </div>
             </div>
 
-            <div class="reg-step">
-              <div class="reg-step-num">3</div>
+            <div class="reg-step step-amber">
+              <div class="reg-step-num num-amber">3</div>
               <div class="reg-step-body">
                 <strong>Submit a short paper</strong>
-                <p>Describe your method on OpenReview. Link to the submission page coming soon.</p>
+                <p>Describe your method on OpenReview.</p>
+              </div>
+              <div class="reg-step-action">
+                <a href="https://openreview.net/group?id=MICCAI.org/2026/Challenge/HEADLINE" target="_blank" rel="noopener" class="btn-amber">OpenReview →</a>
               </div>
             </div>
 

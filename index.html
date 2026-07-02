@@ -376,6 +376,10 @@
         animation: fadeUp 0.6s 0.3s ease both;
       }
 
+      .hero-cta .btn {
+        font-weight: 600;
+      }
+
       .btn {
         display: inline-block;
         padding: 0.65rem 1.35rem;
@@ -402,30 +406,14 @@
         box-shadow: 0 0 28px rgba(26,120,208,0.35);
       }
 
-      .btn-ghost {
-        background: transparent;
-        color: var(--muted);
-        border: 1px solid var(--border);
-      }
+      /* Muted solid tonal fills */
+      .btn-secondary { background: #354082; color: #fff; }
+      .btn-teal { background: #29655d; color: #fff; }
+      .btn-amber { background: #765d32; color: #fff; }
 
-      .btn-ghost:hover {
-        color: var(--text);
-        border-color: rgba(0,0,0,0.18);
-        text-decoration: none;
-      }
-
-      .btn-subtle {
-        background: transparent;
-        color: #6f8092;
-        border: 1px solid var(--border);
-      }
-
-      .btn-subtle:hover {
-        color: #516173;
-        border-color: rgba(0, 0, 0, 0.18);
-        background: rgba(0, 0, 0, 0.02);
-        text-decoration: none;
-      }
+      .btn-secondary:hover { background: #414e9f; text-decoration: none; }
+      .btn-teal:hover { background: #347f75; text-decoration: none; }
+      .btn-amber:hover { background: #8f713d; text-decoration: none; }
 
       @keyframes fadeUp {
         from { opacity: 0; transform: translateY(16px); }
@@ -657,6 +645,15 @@
         flex-shrink: 0;
       }
 
+      .reg-step.step-teal { border-color: rgba(44,125,114,0.32); }
+      .reg-step.step-amber { border-color: rgba(136,104,48,0.32); }
+      .reg-step-num.num-teal { background: #2c7d72; }
+      .reg-step-num.num-amber { background: #886830; }
+      .reg-step-action .btn-teal { background: #2c7d72; }
+      .reg-step-action .btn-amber { background: #886830; }
+      .reg-step-action .btn-teal:hover { background: #349386; }
+      .reg-step-action .btn-amber:hover { background: #9f7938; }
+
       .reg-step-body strong {
         display: block;
         font-size: 0.95rem;
@@ -746,8 +743,9 @@
 
         <div class="hero-cta">
           <a href="signup/" class="btn btn-primary">Register Now</a>
-          <a href="submission/" class="btn btn-ghost">Submission Guide</a>
-          <a href="#about" class="btn btn-ghost">Learn More</a>
+          <a href="submission/" class="btn btn-secondary">Submission Guide</a>
+          <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener noreferrer" class="btn btn-teal">Grand Challenge</a>
+          <a href="https://openreview.net/group?id=MICCAI.org/2026/Challenge/HEADLINE" target="_blank" rel="noopener noreferrer" class="btn btn-amber">OpenReview</a>
         </div>
       </div>
     </header>
@@ -798,7 +796,7 @@
                 <div class="tl-desc">Planned start date for the sanity check phase.</div>
               </div>
               <div class="tl-item">
-                <div class="tl-date"><span class="tl-date-old">June 29, 2026</span>  July 1, 2026</div>
+                <div class="tl-date"><span class="tl-date-old">June 29, 2026</span>  TBC</div>
                 <div class="tl-title">Test phase opens</div>
                 <div class="tl-desc">Planned opening date for final Docker submission.</div>
               </div>
@@ -891,7 +889,7 @@
 
         <!-- --- REGISTRATION --- -->
         <section id="registration">
-          <h2>Register</h2>
+          <h2>Registration & Submission</h2>
           <div class="reg-steps">
 
             <div class="reg-step">
@@ -905,22 +903,25 @@
               </div>
             </div>
 
-            <div class="reg-step">
-              <div class="reg-step-num">2</div>
+            <div class="reg-step step-teal">
+              <div class="reg-step-num num-teal">2</div>
               <div class="reg-step-body">
                 <strong>Submit your method</strong>
-                <p>Methods will be submitted via Grand Challenge once the submission period begins.</p>
+                <p>Methods will be submitted via Grand Challenge. See the <a href="submission/">submission guidelines</a> for an overview.</p>
               </div>
               <div class="reg-step-action">
-                <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener" class="btn btn-primary" style="white-space: nowrap;">Grand Challenge →</a>
+                <a href="https://headline26.grand-challenge.org" target="_blank" rel="noopener" class="btn btn-teal" style="white-space: nowrap;">Grand Challenge →</a>
               </div>
             </div>
 
-            <div class="reg-step">
-              <div class="reg-step-num">3</div>
+            <div class="reg-step step-amber">
+              <div class="reg-step-num num-amber">3</div>
               <div class="reg-step-body">
                 <strong>Submit a short paper</strong>
-                <p>Describe your method on OpenReview. Link to the submission page coming soon.</p>
+                <p>Describe your method on OpenReview.</p>
+              </div>
+              <div class="reg-step-action">
+                <a href="https://openreview.net/group?id=MICCAI.org/2026/Challenge/HEADLINE" target="_blank" rel="noopener" class="btn btn-amber" style="white-space: nowrap;">OpenReview →</a>
               </div>
             </div>
 
@@ -990,6 +991,11 @@
           <h2>Updates</h2>
           <div class="card">
             <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">June 29, 2026</div>
+                <div class="tl-title">Sanity check phase opened</div>
+                <div class="tl-desc">You can now submit your containers and models for a sanity check to ensure that there will be no issues with the final test phase. Please start early to allow sufficient time for debugging.</div>
+              </div>
               <div class="tl-item">
                 <div class="tl-date">June 19, 2026</div>
                 <div class="tl-title">Validation phase opened</div>
