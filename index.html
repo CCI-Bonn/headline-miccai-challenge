@@ -142,6 +142,7 @@
         display: flex;
         gap: clamp(0.5rem, 1.5vw, 1.25rem);
         list-style: none;
+        padding-left: 0;
         padding: 0;
         flex-wrap: nowrap;
         align-items: center;
@@ -451,6 +452,57 @@
 
       .card + .card { margin-top: 1rem; }
 
+      /* --- RESULTS --- */
+      .podium {
+        list-style: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .podium li { color: var(--muted); }
+      .podium strong { color: var(--text); }
+
+      .results-scroll { overflow-x: auto; }
+
+      .results-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+
+      .results-table th,
+      .results-table td {
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .results-table th {
+        font-weight: 600;
+        color: var(--text);
+        border-bottom-color: var(--muted);
+      }
+
+      .results-table td { color: var(--muted); font-variant-numeric: tabular-nums; }
+      .results-table td.team { color: var(--text); font-weight: 500; }
+      .results-table th:nth-child(-n+2),
+      .results-table td:nth-child(-n+2) { text-align: left; }
+      .results-table tbody tr:last-child td { border-bottom: none; }
+
+      .results-note {
+        font-size: 0.85rem;
+        margin-top: 1.25rem;
+      }
+
+      @media (max-width: 540px) {
+        .results-table th,
+        .results-table td { padding: 0.5rem 0.4rem; font-size: 0.85rem; }
+      }
+
       /* --- TIMELINE --- */
       .timeline {
         position: relative;
@@ -585,6 +637,7 @@
         font-weight: 500;
         color: var(--text);
         list-style: none;
+        padding-left: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -716,6 +769,7 @@
         </label>
         <ul class="nav-links">
           <!-- <li><a href="#timeline">Key Dates</a></li> -->
+          <li><a href="#results">Results</a></li>
           <li><a href="#data">Data</a></li>
           <li><a href="#evaluation">Evaluation</a></li>
           <li><a href="#organisers">Organisers</a></li>
@@ -751,16 +805,55 @@
     <main id="content">
       <div class="wrap">
 
-        <!-- --- UPDATES --- -->
-        <section id="updates">
-          <h2>Updates</h2>
+        <!-- --- RESULTS --- -->
+        <section id="results">
+          <h2>Final Results</h2>
           <div class="card">
-            <p>
-              The challenge has now concluded. Thank you to all participants for your contributions and engagement. 
+            <p>Congratulations to the top three teams:</p>
+            <ol class="podium">
+              <li>
+                <strong>1st: IAM_tryhard</strong>, University Medical Center Hamburg-Eppendorf.
+                <a href="https://papers.miccai.org/miccai-2026-sat/HEADLINE_005.html" target="_blank" rel="noopener noreferrer">CIRCA: Maximising Per-Slice Detail for Head-CT Report Generation with a Windowed-RGB and Split-Slab Bone-Projection Representation for the HEADLINE Challenge</a>
+              </li>
+              <li>
+                <strong>2nd: Impression</strong>, Center for Artificial Intelligence in Healthcare, Seoul National University Bundang Hospital.
+                <a href="https://papers.miccai.org/miccai-2026-sat/HEADLINE_007.html" target="_blank" rel="noopener noreferrer">Finding-Aware Contrastive Re-Alignment for Head CT Report Generation</a>
+              </li>
+              <li>
+                <strong>3rd: IUCompath</strong>, Indiana University.
+                <a href="https://papers.miccai.org/miccai-2026-sat/HEADLINE_002.html" target="_blank" rel="noopener noreferrer">FiReGen: Findings-Aware Retrieval and Reinforcement-Tuned Generation of Free-Text Head CT Radiology Reports</a>
+              </li>
+            </ol>
 
-              Papers describing each submission can be found <a href="https://papers.miccai.org/miccai-2026-sat/categories/#HEADLINE" target="_blank" rel="noopener noreferrer">here</a>.
+            <div class="results-scroll">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">S<sub>Auto</sub></th>
+                    <th scope="col">S<sub>Human</sub></th>
+                    <th scope="col">Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td class="team">IAM_tryhard</td><td>0.271</td><td>0.515</td><td>0.393</td></tr>
+                  <tr><td>2</td><td class="team">Impression</td><td>0.270</td><td>0.280</td><td>0.275</td></tr>
+                  <tr><td>3</td><td class="team">IUCompath</td><td>0.249</td><td>0.255</td><td>0.252</td></tr>
+                  <tr><td>4</td><td class="team">shoheyhey53</td><td>0.238</td><td>0.215</td><td>0.227</td></tr>
+                  <tr><td>5</td><td class="team">sk</td><td>0.253</td><td>0.175</td><td>0.214</td></tr>
+                  <tr><td>6</td><td class="team">MSIIP</td><td>0.220</td><td>&ndash;</td><td>&ndash;</td></tr>
+                  <tr><td>7</td><td class="team">TeamTiger</td><td>0.122</td><td>&ndash;</td><td>&ndash;</td></tr>
+                </tbody>
+              </table>
+            </div>
 
-              A challenge paper summarising the challenge and its results will be released in the coming months.
+            <p class="results-note">
+              S<sub>Auto</sub> is the weighted composite of automated metrics on the 500 test cases. The top five teams by
+              S<sub>Auto</sub> were then assessed by radiologists on 50 test cases (S<sub>Human</sub>), and ranked by
+              Final&nbsp;=&nbsp;0.5&nbsp;&times;&nbsp;S<sub>Auto</sub>&nbsp;+&nbsp;0.5&nbsp;&times;&nbsp;S<sub>Human</sub>.
+              Only teams that submitted a final paper are included. Full details are in the
+              <a href="submission/">submission guidelines</a>.
             </p>
           </div>
         </section>
